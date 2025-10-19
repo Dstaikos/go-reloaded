@@ -13,7 +13,7 @@ How it works
 
 You run your program like this:  go run . input.txt output.txt
 
-🗂️ The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
+The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
 
 
 Features & Rules
@@ -44,14 +44,13 @@ Features & Rules
 "welcome to the bridge (cap)" → "Welcome to the Bridge"
 
 
-
-📦 You can also apply them to multiple words using a number:
+You can also apply them to multiple words using a number:
 
 "This is so exciting (up, 2)" → "This is SO EXCITING"
 
 
 
-✍️ Punctuation Rules
+Punctuation Rules
 
 Punctuation marks . , ! ? : ; should:
 
@@ -65,13 +64,13 @@ Example:
 
 
 
-💡 For grouped punctuations (like ... or !?), treat them as one unit:
+For grouped punctuations (like ... or !?), treat them as one unit:
 
 "I was thinking ... You were right" → "I was thinking... You were right"
 
 
 
-🗣️ Quotation Formatting
+Quotation Formatting
 
 Single quotes ' ' should hug the inner words tightly, without spaces.
 
@@ -83,7 +82,7 @@ If there are multiple words inside, the quotes still stay tight:
 
 
 
-🅰️ Article Correction
+Article Correction
 
 When "a" or "A" is followed by a vowel (a, e, i, o, u) or h, it becomes "an" or "An" respectively.
 
