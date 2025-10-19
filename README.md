@@ -1,16 +1,16 @@
-🧠 Text Completion & Auto-Correction Tool
+Text Completion & Auto-Correction Tool
 
-✨ A Go project for smart text editing and formatting
+A Go project for smart text editing and formatting
 
 📖 Description
 
-This project is a text completion and correction tool written in Go 🐹.
+This project is a text completion and correction tool written in Go.
 
 It takes an input text file, applies a series of automatic corrections and transformations, and writes the modified text into an output file.
 
 🔧 The purpose is to simulate a small-scale text editor capable of fixing grammar, formatting, and capitalization — automatically!
 
-It’s part of a peer-reviewed (audited) project, where students correct each other’s work 👩‍💻👨‍💻.
+It’s part of a peer-reviewed (audited) project, where students correct each other’s work .
 
 🚀 How it works
 
