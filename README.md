@@ -1,11 +1,15 @@
 🧠 Text Completion & Auto-Correction Tool
+
 ✨ A Go project for smart text editing and formatting
+
 📖 Description
 
 This project is a text completion and correction tool written in Go 🐹.
+
 It takes an input text file, applies a series of automatic corrections and transformations, and writes the modified text into an output file.
 
 🔧 The purpose is to simulate a small-scale text editor capable of fixing grammar, formatting, and capitalization — automatically!
+
 It’s part of a peer-reviewed (audited) project, where students correct each other’s work 👩‍💻👨‍💻.
 
 🚀 How it works
@@ -18,6 +22,7 @@ go run . input.txt output.txt
 🗂️ The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
 
 🧩 Features & Rules
+
 🔢 Number Conversions
 
 (hex) ➡️ Converts the previous hexadecimal number to decimal
@@ -78,4 +83,5 @@ If there are multiple words inside, the quotes still stay tight:
 When "a" or "A" is followed by a vowel (a, e, i, o, u) or h, it becomes "an" or "An" respectively.
 
 "A amazing rock" → "An amazing rock"
+
 "a honest man" → "an honest man"
