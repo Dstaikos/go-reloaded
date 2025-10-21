@@ -1,27 +1,23 @@
-🧠 Text Completion & Auto-Correction Tool
-
-✨ A Go project for smart text editing and formatting
+Text Completion & Auto-Correction Tool
 
 📖 Description
 
-This project is a text completion and correction tool written in Go 🐹.
+This project is a text completion and correction tool written in Go.
 
 It takes an input text file, applies a series of automatic corrections and transformations, and writes the modified text into an output file.
 
-🔧 The purpose is to simulate a small-scale text editor capable of fixing grammar, formatting, and capitalization — automatically!
-
-It’s part of a peer-reviewed (audited) project, where students correct each other’s work 👩‍💻👨‍💻.
-
-🚀 How it works
-
-You run your program like this:
-
-go run . input.txt output.txt
+The purpose is to simulate a small-scale text editor capable of fixing grammar, formatting, and capitalization — automatically!
 
 
-🗂️ The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
+How it works
 
-🧩 Features & Rules
+You run your program like this:  go run . input.txt output.txt
+
+The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
+
+
+Features & Rules
+
 
 🔢 Number Conversions
 
@@ -47,11 +43,14 @@ go run . input.txt output.txt
 
 "welcome to the bridge (cap)" → "Welcome to the Bridge"
 
-📦 You can also apply them to multiple words using a number:
+
+You can also apply them to multiple words using a number:
 
 "This is so exciting (up, 2)" → "This is SO EXCITING"
 
-✍️ Punctuation Rules
+
+
+Punctuation Rules
 
 Punctuation marks . , ! ? : ; should:
 
@@ -63,11 +62,15 @@ Example:
 
 "I was sitting over there ,and then BAMM !!" → "I was sitting over there, and then BAMM!!"
 
-💡 For grouped punctuations (like ... or !?), treat them as one unit:
+
+
+For grouped punctuations (like ... or !?), treat them as one unit:
 
 "I was thinking ... You were right" → "I was thinking... You were right"
 
-🗣️ Quotation Formatting
+
+
+Quotation Formatting
 
 Single quotes ' ' should hug the inner words tightly, without spaces.
 
@@ -75,10 +78,11 @@ Single quotes ' ' should hug the inner words tightly, without spaces.
 
 If there are multiple words inside, the quotes still stay tight:
 
-"As Elton John said: ' I am the most well-known homosexual in the world '"
-→ "As Elton John said: 'I am the most well-known homosexual in the world'"
+"As Elton John said: ' I am the most well-known homosexual in the world '" → "As Elton John said: 'I am the most well-known homosexual in the world'"
 
-🅰️ Article Correction
+
+
+Article Correction
 
 When "a" or "A" is followed by a vowel (a, e, i, o, u) or h, it becomes "an" or "An" respectively.
 
