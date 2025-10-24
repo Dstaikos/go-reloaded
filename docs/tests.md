@@ -5,23 +5,23 @@
 
 1.	Input: "1E (hex) files were added"
 
-Output: "30 files were added"
+    Output: "30 files were added"
 
 2.	Input: "It has been 10 (bin) years"
 
-Output: "It has been 2 years"
+    Output: "It has been 2 years"
 
 3.	Input: "Ready, set, go (up) !"
 
-Output: "Ready, set, GO!"
+    Output: "Ready, set, GO!"
 
 4.	Input: "This is so exciting (up, 2)"
 
-Output: "This is SO EXCITING"
+    Output: "This is SO EXCITING"
 
 5.	Input: "I was sitting over there ,and then BAMM !!"
 
-Output: "I was sitting over there, and then BAMM!!"
+    Output: "I was sitting over there, and then BAMM!!"
 
 
 
@@ -30,23 +30,23 @@ Output: "I was sitting over there, and then BAMM!!"
 
 1.	Input: “This is unbelievable (up)(low)”
 
-Output: “This is unbelievable”
+    Output: “This is unbelievable”
 
 2.	Input: “Wait (up) !?”
 
-Output: “WAIT!?'”
+    Output: “WAIT!?'”
 
 3.	Input: “These results are shocking (up, 2)(cap, 3)” 
 
-Output: “These Results ARE SHOCKING”
+    Output: “These Results ARE SHOCKING”
 
 4.	Input: “' wow ! ' she said ... unbelievable (up) !!”
 
-Output: “'wow!' she said... UNBELIEVABLE!!”
+    Output: “'wow!' she said... UNBELIEVABLE!!”
 
 5.	Input: “Hello world(up,3)”
 
-Output: ?
+    Output: ?
 
 
 
