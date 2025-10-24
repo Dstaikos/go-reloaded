@@ -1,3 +1,6 @@
+
+<h1>Analysis<h1>
+
 We will create a tool that processes and “corrects” a user’s text file based on specific rules:
 
 • When **(hex)** appears, it converts the hexadecimal number that comes *before* it into its decimal form.
