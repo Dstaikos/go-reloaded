@@ -6,15 +6,16 @@ The Pipeline architecture divides text processing into sequential stages.
 Each stage takes the result of the previous one and modifies it.
 This allows having separate functions such as:
 
-Detecting and converting (hex) and (bin)
+• Detecting and converting (hex) and (bin)
 
-Applying (up), (low), (cap)
+• Applying (up), (low), (cap)
 
-Correcting punctuation marks
+• Correcting punctuation marks
 
-Replacing a with an where necessary
+• Replacing a with an where necessary
 
 Example flow:
+
 Initial text → Number conversion → Word formatting → Punctuation correction → Final text
 
 <h4>Advantages:</h4>
@@ -66,6 +67,9 @@ The program has one main loop that checks the current state and decides what to 
 <h3>Architecture Choice</h3>
 
 I chose to use the Pipeline approach.
+
 The program will be reviewed by other auditors, so clarity and simplicity of the code are more important than optimization.
+
 With the Pipeline, I can write small, clear functions that each apply one specific rule and explain the program flow step by step.
+
 An FSM would be more efficient but harder to understand or audit.
