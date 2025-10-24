@@ -1,7 +1,8 @@
 
 <h1>Analysis</h1>
 
-<h4> The documents in the ripository will be:
+<h4> The documents in the repository will be:
+
 
 • The Go program
 
@@ -14,6 +15,8 @@
 <h2> First, clone the repository:</h2>
 
 
+`git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
+cd go-reloaded`
 
 
 
