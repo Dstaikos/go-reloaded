@@ -16,10 +16,8 @@
 
 
 ```
-
 git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
 cd go-reloaded
-
 ```
 
 
