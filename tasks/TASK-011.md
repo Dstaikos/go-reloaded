@@ -1,4 +1,4 @@
-## 🧠 TASK-011 — Output Writing & CLI Finalization
+## TASK-011 — Output Writing & CLI Finalization
 
 - **ID**: TASK-011  
 - **Owner**: Backend Developer  

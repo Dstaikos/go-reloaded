@@ -1,4 +1,4 @@
-## 🧠 TASK-001 — Project Initialization & File Handling
+## TASK-001 — Project Initialization & File Handling
 
 - **ID**: TASK-001  
 - **Owner**: Backend Developer  

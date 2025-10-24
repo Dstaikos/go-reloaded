@@ -1,4 +1,4 @@
-## 🧠 TASK-009 — “a” / “an” Article Rule
+## TASK-009 — “a” / “an” Article Rule
 
 - **ID**: TASK-009  
 - **Owner**: Backend Developer  

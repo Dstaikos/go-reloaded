@@ -1,4 +1,4 @@
-## 🧠 TASK-012 — Documentation & QA
+## TASK-012 — Documentation & QA
 
 - **ID**: TASK-012  
 - **Owner**: Documentation Lead  

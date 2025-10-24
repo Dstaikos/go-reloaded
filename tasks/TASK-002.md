@@ -1,4 +1,4 @@
-## 🧠 TASK-002 — Uppercase Transformation
+## TASK-002 — Uppercase Transformation
 
 - **ID**: TASK-002  
 - **Owner**: Backend Developer  

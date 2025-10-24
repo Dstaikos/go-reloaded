@@ -1,4 +1,4 @@
-## 🧠 TASK-004 — Capitalization Transformation
+## TASK-004 — Capitalization Transformation
 
 - **ID**: TASK-004  
 - **Owner**: Backend Developer  

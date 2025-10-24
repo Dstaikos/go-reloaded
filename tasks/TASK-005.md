@@ -1,4 +1,4 @@
-## 🧠 TASK-005 — Hexadecimal Conversion
+## TASK-005 — Hexadecimal Conversion
 
 - **ID**: TASK-005  
 - **Owner**: Backend Developer  

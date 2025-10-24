@@ -1,4 +1,4 @@
-## 🧠 TASK-010 — Full Transformation Pipeline
+## TASK-010 — Full Transformation Pipeline
 
 - **ID**: TASK-010  
 - **Owner**: Backend Developer  

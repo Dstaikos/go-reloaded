@@ -1,4 +1,4 @@
-## 🧠 TASK-008 — Apostrophe Formatting
+## TASK-008 — Apostrophe Formatting
 
 - **ID**: TASK-008  
 - **Owner**: Backend Developer  

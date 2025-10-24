@@ -1,4 +1,4 @@
-## 🧠 TASK-007 — Punctuation Normalization
+## TASK-007 — Punctuation Normalization
 
 - **ID**: TASK-007  
 - **Owner**: Backend Developer  

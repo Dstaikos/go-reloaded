@@ -1,4 +1,4 @@
-## 🧠 TASK-003 — Lowercase Transformation
+## TASK-003 — Lowercase Transformation
 
 - **ID**: TASK-003  
 - **Owner**: Backend Developer  

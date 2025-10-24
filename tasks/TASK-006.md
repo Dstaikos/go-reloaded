@@ -1,4 +1,4 @@
-## 🧠 TASK-006 — Binary Conversion
+## TASK-006 — Binary Conversion
 
 - **ID**: TASK-006  
 - **Owner**: Backend Developer  
