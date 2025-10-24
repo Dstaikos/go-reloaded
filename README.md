@@ -11,9 +11,14 @@ It takes an input text file, applies a series of automatic corrections and trans
 The purpose is to simulate a small-scale text editor capable of fixing grammar, formatting, and capitalization — automatically!</h4>
 
 
-<h3>How it works</h3>
+<h3>How it works:</h3>
 
-You run your program like this:  go run main.go input.txt output.txt
+You run your program like this:  
+
+```
+go run main.go input.txt output.txt
+
+```
 
 The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
 
