@@ -1,5 +1,7 @@
 
-Βασικά test cases:
+<h2>Golden test set</h2>
+
+<h4>Basic test cases:</h4>
 
 1.	Input: "1E (hex) files were added"
 Output: "30 files were added"
@@ -19,10 +21,7 @@ Output: "I was sitting over there, and then BAMM!!"
 
 
 
-
-
-
-Tricky test cases
+<h4>Tricky test cases</h4>
 
 1.	Input: “This is unbelievable (up)(low)”
 Output: “This is unbelievable”
@@ -41,11 +40,7 @@ Output: ?
 
 
 
-
-
-
-
-Μεγάλη παράγραφος
+<h4>Paragraph</h4>
 
 As John said : ‘ I saw 2D (hex) birds and 1011 (bin) cats ‘ yesterday . It was a amazing experience ! This was truly fun (up, 3) .Can’t wait to do it again(cap, 2).
 
