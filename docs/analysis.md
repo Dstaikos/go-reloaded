@@ -15,8 +15,12 @@
 <h2> First, clone the repository:</h2>
 
 
-```git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
-cd go-reloaded```
+```
+
+git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
+cd go-reloaded
+
+```
 
 
 
