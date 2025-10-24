@@ -12,20 +12,22 @@
 
 </h4>
 
-<h2> First, clone the repository:</h2>
-
+<h3> First, clone the repository:</h3>
 
 ```
 git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
 cd go-reloaded
 ```
 
+<h3>After making sure the .txt file you want to use as input is inside cmd folder, run the program using:</h3>
+
+```
+go run ./cmd/main.go <input.txt> <output.txt>
+```
 
 
 
-
-
-We will create a tool that processes and “corrects” a user’s text file based on specific rules:
+The program is a tool that processes and “corrects” a user’s text file based on specific rules:
 
 • When **(hex)** appears, it converts the hexadecimal number that comes *before* it into its decimal form.
 Example: `"1E (hex) files were added"` → `"30 files were added"`
