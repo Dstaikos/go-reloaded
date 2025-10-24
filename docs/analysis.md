@@ -65,3 +65,9 @@ Example: `"I am exactly how they describe me: ' awesome '"` → `"I am exactly h
 
 • When the single letter **“a” (or “A”)** appears by itself and is followed by a vowel (**a, e, i, o, u**) or **h**, it should change to **“an” (or “An”)**.
 Example: `"There it was. A amazing rock!"` → `"There it was. An amazing rock!"`
+
+
+⚠️ Important:
+
+All commands must follow the exact format shown in the specifications. For example, (up, 2) is valid, but ( up,2 ) or (up , 2) will not be recognized as a command and will be treated as normal text. Any extra or misplaced spaces inside the parentheses will cause the modifier to be ignored.
+
