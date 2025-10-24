@@ -4,7 +4,7 @@
 <h4> The documents in the repository will be:
 
 
-• The Go program
+• The cmd folder with the Go program inside
 
 • The README.md file that explains the usage of the program
 
@@ -27,7 +27,7 @@ go run ./cmd/main.go <input.txt> <output.txt>
 
 
 
-The program is a tool that processes and “corrects” a user’s text file based on specific rules:
+<h3>The program is a tool that processes and “corrects” a user’s text file based on specific rules:</h3>
 
 • When **(hex)** appears, it converts the hexadecimal number that comes *before* it into its decimal form.
 Example: `"1E (hex) files were added"` → `"30 files were added"`
