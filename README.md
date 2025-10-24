@@ -7,7 +7,6 @@
 
 It takes an input text file, applies a series of automatic corrections and transformations, and writes the modified text into an output file.
 
-
 The purpose is to simulate a small-scale text editor capable of fixing grammar, formatting, and capitalization — automatically!</h4>
 
 
