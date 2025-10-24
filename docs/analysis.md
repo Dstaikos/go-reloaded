@@ -1,12 +1,15 @@
 
 <h1>Analysis</h1>
 
-<h5> The documents in the ripository will be:
+<h4> The documents in the ripository will be:
 
 • The Go program
+
 • The README.md file that explains the usage of the program
+
 • The folder pkg that contains all the functions from the piscine-go repository that are required.
-</h5>
+
+</h4>
 
 <h2> First, clone the repository:</h2>
 
