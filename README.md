@@ -17,7 +17,6 @@ You run your program like this:
 
 ```
 go run main.go input.txt output.txt
-
 ```
 
 The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
