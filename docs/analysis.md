@@ -67,7 +67,7 @@ Example: `"I am exactly how they describe me: ' awesome '"` → `"I am exactly h
 Example: `"There it was. A amazing rock!"` → `"There it was. An amazing rock!"`
 
 
-⚠️ Important:
+<h2>⚠️ Important:</h2>
 
 All commands must follow the exact format shown in the specifications. For example, (up, 2) is valid, but ( up,2 ) or (up , 2) will not be recognized as a command and will be treated as normal text. Any extra or misplaced spaces inside the parentheses will cause the modifier to be ignored.
 Additionally, the number following a modifier (e.g. in (up, 2)) must be a non-negative integer (≥ 0). If a negative number is provided, it will also be treated as normal text rather than a valid command.
