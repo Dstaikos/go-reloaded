@@ -25,8 +25,7 @@ func main() {
 	// convert bytes -> string
 	text := string(data)
 
-	text = piscine.Upper(text)
-	text = piscine.Lower(text)
+	text = piscine.UpLowCap(text)
 
 	fmt.Println("File contents:")
 	fmt.Println(text)
