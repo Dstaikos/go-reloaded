@@ -26,7 +26,9 @@ func main() {
 	text := string(data)
 
 	text = piscine.Upper(text)
+	text = piscine.Lower(text)
 
 	fmt.Println("File contents:")
 	fmt.Println(text)
+
 }
