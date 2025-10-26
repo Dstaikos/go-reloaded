@@ -34,11 +34,11 @@
 
 2.	Input: “Wait (up) !?”
 
-    Output: “WAIT!?'”
+    Output: “WAIT!?”
 
 3.	Input: “These results are shocking (up, 2)(cap, 3)” 
 
-    Output: “These Results ARE SHOCKING”
+    Output: “These Results Are Shocking”
 
 4.	Input: “' wow ! ' she said ... unbelievable (up) !!”
 
@@ -52,7 +52,43 @@
 
     Output: “Good MORNING LADIES AND gentlemen”
 
+7. Input: “Good morning (up, -1)”
 
+   Output: “Good morning (up, -1)”
+
+8. Input: “Good morning (up, 0)”
+
+   Output: “Good morning”
+
+9. Input: “Good morning (  up,1     )”
+
+   Output: “Good morning (  up,1    )”
+
+10. Input: “Good morning { (up)”
+
+   Output: “Good MORNING {”
+   
+11. Input: “state-of-the-art (up)”
+
+    Output: “STATE-OF-THE-ART”
+
+12. Input: “(up)start here”
+
+    Output: “start here”
+
+13. Input: “it's (up) nice”
+
+    Output: “IT'S nice”
+
+14. Input: “math ( (up) )”
+
+    Output: “MATH (  )”
+
+    
+
+    
+
+   
 
 <h4>Paragraph</h4>
 

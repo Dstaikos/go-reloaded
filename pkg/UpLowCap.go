@@ -113,92 +113,115 @@ func UpLowCap(s string) string {
 	return string(newRunes)
 }
 
-// applyUp uppercases the previous `count` words
+// ==================== HELPER FUNCTIONS ====================
+
+// applyUp uppercases the previous `count` words (only if they contain letters)
 func applyUp(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
+	applied := 0
 
-	for w := 0; w < count; w++ {
+	for index >= 0 && applied < count {
 		// Skip trailing spaces
 		for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
 			index--
 		}
-
 		if index < 0 {
 			break
 		}
 
 		end := index
+		hasLetter := false
+
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
+			if unicode.IsLetter((*newRunes)[index]) {
+				hasLetter = true
+			}
 			index--
 		}
+
 		start := index + 1
 
-		for i := start; i <= end; i++ {
-			if unicode.IsLetter((*newRunes)[i]) {
+		if hasLetter {
+			for i := start; i <= end; i++ {
 				(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
 			}
+			applied++
 		}
 	}
 }
 
-// applyLow uppercases the previous `count` words
+// applyLow lowercases the previous `count` words (only if they contain letters)
 func applyLow(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
+	applied := 0
 
-	for w := 0; w < count; w++ {
-		// Skip trailing spaces
+	for index >= 0 && applied < count {
 		for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
 			index--
 		}
-
 		if index < 0 {
 			break
 		}
 
 		end := index
+		hasLetter := false
+
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
+			if unicode.IsLetter((*newRunes)[index]) {
+				hasLetter = true
+			}
 			index--
 		}
+
 		start := index + 1
 
-		for i := start; i <= end; i++ {
-			if unicode.IsLetter((*newRunes)[i]) {
+		if hasLetter {
+			for i := start; i <= end; i++ {
 				(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
 			}
+			applied++
 		}
 	}
 }
 
-// applyUp uppercases the previous `count` words
+// applyCap capitalizes the previous `count` words (only if they contain letters)
 func applyCap(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
+	applied := 0
 
-	for w := 0; w < count; w++ {
-		// Skip trailing spaces
+	for index >= 0 && applied < count {
 		for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
 			index--
 		}
-
 		if index < 0 {
 			break
 		}
 
 		end := index
+		hasLetter := false
+
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
+			if unicode.IsLetter((*newRunes)[index]) {
+				hasLetter = true
+			}
 			index--
 		}
+
 		start := index + 1
 
-		firstLetterFound := false
-		for i := start; i <= end; i++ {
-			if unicode.IsLetter((*newRunes)[i]) {
-				if !firstLetterFound {
-					(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
-					firstLetterFound = true
-				} else {
-					(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
+		if hasLetter {
+			firstLetterFound := false
+			for i := start; i <= end; i++ {
+				if unicode.IsLetter((*newRunes)[i]) {
+					if !firstLetterFound {
+						(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
+						firstLetterFound = true
+					} else {
+						(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
+					}
 				}
 			}
+			applied++
 		}
 	}
 }
