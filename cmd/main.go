@@ -25,6 +25,7 @@ func main() {
 	// convert bytes -> string
 	text := string(data)
 
+	text = piscine.HexBin(text)
 	text = piscine.UpLowCap(text)
 
 	fmt.Println("File contents:")
