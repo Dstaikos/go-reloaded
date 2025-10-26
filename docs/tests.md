@@ -46,7 +46,11 @@
 
 5.	Input: “Hello world(up,3)”
 
-    Output: ?
+    Output: “HELLO WORLD”
+
+6.  Input: “Good morning ladies(cap) and(up, 3) gentlemen”
+
+    Output: “Good MORNING LADIES AND gentlemen”
 
 
 
