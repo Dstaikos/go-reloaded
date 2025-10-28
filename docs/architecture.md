@@ -12,7 +12,7 @@ This document describes the high-level architecture of the `go-reloaded` reposit
   - Library code that implements the text transformation rules (package `piscine`). Key files:
     - `Upper.go`, `Lower.go`, `UpLowCap.go` — detect and apply `(up)`, `(low)`, `(cap)` commands and variants like `(up, 2)`.
     - `RemoveSpces.go` — helper `removeTrailingSpace` that trims trailing spaces from a rune slice.
-    - `hexconv.go` — placeholder for hex conversion logic (not yet implemented).
+    - `hexconv.go` — placeholder for hex conversion logic.
 - docs/ — documentation and analysis files (this file added here).
 - tasks/ — task definitions and TODOs.
 
