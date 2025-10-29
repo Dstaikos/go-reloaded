@@ -28,6 +28,7 @@ func main() {
 	text = piscine.HexBin(text)
 	text = piscine.UpLowCap(text)
 	text = piscine.FixPunctuation(text)
+	text = piscine.AnConvert(text)
 
 	fmt.Println("File contents:")
 	fmt.Println(text)
