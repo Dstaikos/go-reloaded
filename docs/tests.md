@@ -36,7 +36,7 @@
 
     Output: “WAIT!?”
 
-3.	Input: “These results are shocking (up, 2)(cap, 3)” 
+3.	Input: “These results are shocking (up, 2)(cap, 3)”
 
     Output: “These Results Are Shocking”
 
@@ -44,7 +44,7 @@
 
     Output: “'wow!' she said... UNBELIEVABLE!!”
 
-5.	Input: “Hello world(up,3)”
+5.	Input: “Hello world(up, 3)”
 
     Output: “HELLO WORLD”
 
@@ -67,7 +67,7 @@
 10. Input: “Good morning { (up)”
 
    Output: “Good MORNING {”
-   
+
 11. Input: “state-of-the-art (up)”
 
     Output: “STATE-OF-THE-ART”
@@ -84,15 +84,15 @@
 
     Output: “MATH (  )”
 
-    
 
-    
 
-   
+
+
+
 
 <h4>Paragraph</h4>
 
-As John said : ‘ I saw 2D (hex) birds and 1011 (bin) cats ‘ yesterday . It was a amazing experience ! This was truly fun (up, 3) .Can’t wait to do it again(cap, 2).
+As John said : ' I saw 2D (hex) birds and 1011 (bin) cats ' yesterday . It was a amazing experience !! This was truly fun (up, 3) .Can’t wait to do it again(cap, 2).
 
 
-Output: As John said: ‘I saw 45 birds and 11 cats’ yesterday . It was an amazing experience! This WAS TRULY FUN. Can’t wait to do It Again.
+Output: As John said: 'I saw 45 birds and 11 cats' yesterday . It was an amazing experience!! This WAS TRULY FUN. Can’t wait to do It Again.
