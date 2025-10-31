@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	piscine "go-reloaded/pkg"
+	"go-reloaded/pkg"
 )
 
 func main() {
@@ -22,13 +22,13 @@ func main() {
 		return
 	}
 
-	// convert bytes -> stringggg
+	// convert bytes -> string
 	text := string(data)
 
-	text = piscine.HexBin(text)
-	text = piscine.UpLowCap(text)
-	text = piscine.FixPunctuation(text)
-	text = piscine.AnConvert(text)
+	text = pkg.HexBin(text)
+	text = pkg.UpLowCap(text)
+	text = pkg.FixPunctuation(text)
+	text = pkg.AnConvert(text)
 
 	// write processed text to output file
 	if err := os.WriteFile(outputFile, []byte(text), 0o644); err != nil {

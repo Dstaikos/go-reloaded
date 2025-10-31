@@ -1,4 +1,4 @@
-## TASK-003 — Lowercase Transformation
+## TASK-003 — Hex & Binary Conversion
 
 - **ID**: TASK-003  
 - **Owner**: Backend Developer  
@@ -6,12 +6,17 @@
 - **Confidence**: High  
 - **Hard Dependencies**: TASK-002  
 - **Soft Dependencies**: TASK-004  
-- **Related Blueprint Pillars**: Text Transformation
+- **Related Blueprint Pillars**: Numeric Conversion
 
 ### Mission Profile
-Implement `(low)` and `(low, x)` modifiers to lowercase the previous one or `x` words.
+Implement `(hex)` and `(bin)` conversions in a single function that detects and converts hexadecimal and binary numbers to decimal.
+
+### Deliverables
+- `/pkg/hexconv.go` with `HexBin()` function handling both conversions.  
+- Helper functions: `applyHex()`, `applyBin()`, `trimTokenBounds()`.  
+- Unit tests for valid/invalid hex and binary formats.
 
 ### Steps
-1. **Write Tests:** `"I AM HERE (low, 2)"` → `"I am here"`.  
-2. **Implement:** `Lower(s string)` with logic similar to `Upper()`.  
-3. **Validate:** Unit tests confirm correctness and skip invalid forms.
+1. **Write Tests:** `"1E (hex)"` → `"30"`; `"101 (bin)"` → `"5"`; invalid formats ignored.  
+2. **Implement:** Single `HexBin()` function using `strconv.ParseInt()` with base 16 and 2, plus token boundary trimming.  
+3. **Validate:** Run `go test ./pkg` — all conversion tests pass.

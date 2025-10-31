@@ -1,17 +1,17 @@
-## TASK-008 — Apostrophe Formatting
+## TASK-008 — Documentation & QA
 
 - **ID**: TASK-008  
-- **Owner**: Backend Developer  
+- **Owner**: Documentation Lead  
 - **Size**: S  
 - **Confidence**: High  
 - **Hard Dependencies**: TASK-007  
-- **Soft Dependencies**: TASK-009  
-- **Related Blueprint Pillars**: Grammar & Readability
+- **Soft Dependencies**: None  
+- **Related Blueprint Pillars**: Developer Experience
 
 ### Mission Profile
-Ensure single quotes are correctly paired and without inner spacing.
+Create comprehensive documentation describing usage, examples, and rule specifications.
 
 ### Steps
-1. **Write Tests:** `"I am ' cool '"` → `"I am 'cool'"`.  
-2. **Implement:** `FixApostrophes(s string)` using regex or manual state tracking.  
-3. **Validate:** Unit tests ensure multiple quoted segments handled.
+1. **Write Tests:** *(Optional linting)* — confirm README exists and is complete.  
+2. **Implement:** Document each modifier, usage examples, and run commands in README.md.  
+3. **Validate:** Peer review and functional example check.
