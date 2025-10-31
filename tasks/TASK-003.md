@@ -4,7 +4,7 @@
 - **Owner**: Backend Developer
 - **Size**: M
 - **Confidence**: High
-- **Hard Dependencies**: TASK-002-v2
+- **Hard Dependencies**: TASK-002-helper
 - **Soft Dependencies**: TASK-002
 - **Related Blueprint Pillars**: Numeric Conversion
 

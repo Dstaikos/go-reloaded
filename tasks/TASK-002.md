@@ -4,7 +4,7 @@
 - **Owner**: Backend Developer
 - **Size**: L
 - **Confidence**: High
-- **Hard Dependencies**: TASK-002-v2
+- **Hard Dependencies**: TASK-002-helper
 - **Soft Dependencies**: TASK-003
 - **Related Blueprint Pillars**: Text Transformation
 
