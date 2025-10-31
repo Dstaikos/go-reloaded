@@ -76,13 +76,17 @@
 
     Output: “start here”
 
-13. Input: “it's (up) nice”
+13. Input: “'  '    hello    '  '”
 
-    Output: “IT'S nice”
+    Output: “''hello''”
 
 14. Input: “math ( (up) )”
 
     Output: “MATH (  )”
+
+15. OVERFLOW CHECK
+
+    Input: “FFFFFFFFFFFFFFFFFFF(hex)”
 
 
 
