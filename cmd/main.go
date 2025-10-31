@@ -22,7 +22,7 @@ func main() {
 		return
 	}
 
-	// convert bytes -> string
+	// convert bytes -> stringggg
 	text := string(data)
 
 	text = piscine.HexBin(text)
