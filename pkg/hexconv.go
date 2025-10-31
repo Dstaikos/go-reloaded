@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	"strconv"
+	"math/big"
 	"unicode"
 )
 
@@ -89,9 +89,10 @@ func applyHex(newRunes *[]rune, count int) {
 		}
 
 		hexStr := string((*newRunes)[tStart : tEnd+1])
-		value, err := strconv.ParseInt(hexStr, 16, 64)
-		if err == nil {
-			decimalStr := []rune(strconv.FormatInt(value, 10))
+		bigInt := new(big.Int)
+		bigInt, success := bigInt.SetString(hexStr, 16)
+		if success {
+			decimalStr := []rune(bigInt.String())
 
 			// Prepare right-side slice after the token (use original end to keep surrounding punctuation)
 			right := (*newRunes)[tEnd+1:]
@@ -139,9 +140,10 @@ func applyBin(newRunes *[]rune, count int) {
 		}
 
 		binStr := string((*newRunes)[tStart : tEnd+1])
-		value, err := strconv.ParseInt(binStr, 2, 64)
-		if err == nil {
-			decimalStr := []rune(strconv.FormatInt(value, 10))
+		bigInt := new(big.Int)
+		bigInt, success := bigInt.SetString(binStr, 2)
+		if success {
+			decimalStr := []rune(bigInt.String())
 
 			// Prepare right-side slice after the token
 			right := (*newRunes)[tEnd+1:]
