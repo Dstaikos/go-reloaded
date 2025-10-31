@@ -1,6 +1,6 @@
 ## TASK-002 — Helper Functions & Utilities
 
-- **ID**: TASK-002
+- **ID**: TASK-002-helper
 - **Owner**: Backend Developer
 - **Size**: S
 - **Confidence**: High
