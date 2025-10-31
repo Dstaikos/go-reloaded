@@ -16,6 +16,7 @@ func main() {
 	inputFile := os.Args[1]
 	outputFile := os.Args[2]
 
+	// read text from input file
 	data, err := os.ReadFile(inputFile)
 	if err != nil {
 		fmt.Println("Error reading file:", err)

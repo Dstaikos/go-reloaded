@@ -4,8 +4,8 @@
 - **Owner**: Backend Developer
 - **Size**: M
 - **Confidence**: Medium
-- **Hard Dependencies**: TASK-005
-- **Soft Dependencies**: TASK-007
+- **Hard Dependencies**: TASK-002, TASK-003, TASK-004, TASK-005
+- **Soft Dependencies**: None
 - **Related Blueprint Pillars**: Integration
 
 ### Mission Profile
