@@ -5,7 +5,7 @@
 - **Size**: M
 - **Confidence**: Medium
 - **Hard Dependencies**: TASK-002, TASK-003, TASK-004, TASK-005
-- **Soft Dependencies**: None
+- **Soft Dependencies**: TASK-001
 - **Related Blueprint Pillars**: Integration
 
 ### Mission Profile

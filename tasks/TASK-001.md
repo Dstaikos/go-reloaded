@@ -12,7 +12,7 @@
 Set up the project structure and CLI entry point to read from an input file, apply string transformations, and display or write results.
 
 ### Deliverables
-- `/cmd/main.go` reading `os.Args[1]` (input) and optionally writing output.
+- `/cmd/main.go` reading `os.Args[1]` input file and `os.Args[2]` output file.
 - Graceful error messages for missing files or args.
 - Unit test verifying file reading/writing and CLI argument validation.
 
