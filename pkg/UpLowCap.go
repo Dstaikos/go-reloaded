@@ -16,6 +16,10 @@ func UpLowCap(s string) string {
 			// ---------- CASE 1: (up) ----------
 			if i+3 < len(runes) && runes[i+3] == ')' {
 				removeTrailingSpaces(&newRunes)
+				if shouldConvertArticle(&newRunes, runes, i+4, "up") {
+					i += 3
+					continue
+				}
 				applyUp(&newRunes, 1)
 				i += 3
 				continue
@@ -48,6 +52,10 @@ func UpLowCap(s string) string {
 			// ---------- CASE 1: (low) ----------
 			if i+4 < len(runes) && runes[i+4] == ')' {
 				removeTrailingSpaces(&newRunes)
+				if shouldConvertArticle(&newRunes, runes, i+5, "low") {
+					i += 4
+					continue
+				}
 				applyLow(&newRunes, 1)
 				i += 4
 				continue
@@ -80,6 +88,10 @@ func UpLowCap(s string) string {
 			// ---------- CASE 1: (cap) ----------
 			if i+4 < len(runes) && runes[i+4] == ')' {
 				removeTrailingSpaces(&newRunes)
+				if shouldConvertArticle(&newRunes, runes, i+5, "cap") {
+					i += 4
+					continue
+				}
 				applyCap(&newRunes, 1)
 				i += 4
 				continue
@@ -114,6 +126,61 @@ func UpLowCap(s string) string {
 }
 
 // ==================== HELPER FUNCTIONS ====================
+
+// shouldConvertArticle checks if last word is "a" and next word starts with vowel, then converts accordingly
+func shouldConvertArticle(newRunes *[]rune, originalRunes []rune, nextPos int, modifier string) bool {
+	vowels := []rune{'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U', 'h', 'H'}
+	
+	// Check if last word is "a" or "A"
+	index := len(*newRunes) - 1
+	for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
+		index--
+	}
+	if index < 0 || ((*newRunes)[index] != 'a' && (*newRunes)[index] != 'A') {
+		return false
+	}
+	
+	// Check if it's a single character word
+	if index > 0 && !unicode.IsSpace((*newRunes)[index-1]) {
+		return false
+	}
+	
+	// Find next word in original runes
+	for nextPos < len(originalRunes) && unicode.IsSpace(originalRunes[nextPos]) {
+		nextPos++
+	}
+	
+	if nextPos >= len(originalRunes) {
+		return false
+	}
+	
+	// Check if next word starts with vowel
+	startsWithVowel := false
+	for _, v := range vowels {
+		if originalRunes[nextPos] == v {
+			startsWithVowel = true
+			break
+		}
+	}
+	
+	if !startsWithVowel {
+		return false
+	}
+	
+	// Convert article based on modifier
+	if modifier == "up" {
+		(*newRunes)[index] = 'A'
+		*newRunes = append((*newRunes)[:index+1], append([]rune{'N'}, (*newRunes)[index+1:]...)...)
+	} else if modifier == "cap" {
+		(*newRunes)[index] = 'A'
+		*newRunes = append((*newRunes)[:index+1], append([]rune{'n'}, (*newRunes)[index+1:]...)...)
+	} else if modifier == "low" {
+		(*newRunes)[index] = 'a'
+		*newRunes = append((*newRunes)[:index+1], append([]rune{'n'}, (*newRunes)[index+1:]...)...)
+	}
+	
+	return true
+}
 
 // applyUp uppercases the previous `count` words (only if they contain letters)
 func applyUp(newRunes *[]rune, count int) {
