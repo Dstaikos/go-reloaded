@@ -39,10 +39,11 @@ func FixPunctuation(s string) string {
 			}
 
 			// If there is something after the punctuation, ensure exactly one space
-			// unless the next rune is another punctuation (but allow space before quotes)
+			// unless the next rune is another punctuation or a closing quote
 			if k < len(runes) {
 				next := runes[k]
-				if !isPunct(next) {
+				isQuote := next == '\'' || next == '\u2019'
+				if !isPunct(next) && !isQuote {
 					newRunes = append(newRunes, ' ')
 				}
 			}
