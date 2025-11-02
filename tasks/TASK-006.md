@@ -21,7 +21,7 @@ Chain all text processing functions in the main pipeline that processes the enti
    ```go
    text = pkg.HexBin(text)
    text = pkg.UpLowCap(text)
-   text = pkg.FixPunctuation(text)
    text = pkg.AnConvert(text)
+   text = pkg.FixPunctuation(text)
    ```
 3. **Validate:** Integration test matches expected final output.

@@ -10,6 +10,8 @@
 
 • The folder pkg that contains all the functions that are required.
 
+• The folder tasks that contains the steps followed for the creation of thee project.
+
 </h4>
 
 <h3> First, clone the repository:</h3>
