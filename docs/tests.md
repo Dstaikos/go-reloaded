@@ -86,7 +86,7 @@
 
 15. Input:
 
-         a (up) orange
+           a (up) orange
 
            a (cap) orange
 
