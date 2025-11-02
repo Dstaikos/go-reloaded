@@ -43,7 +43,22 @@ func FixPunctuation(s string) string {
 			if k < len(runes) {
 				next := runes[k]
 				isQuote := next == '\'' || next == '\u2019'
-				if !isPunct(next) && !isQuote {
+				
+				// Check if this quote is likely a closing quote by looking at what comes before it in original input
+				isClosingQuote := false
+				if isQuote {
+					// Look at the character before this quote in the original input
+					if k > 0 {
+						charBeforeQuote := runes[k-1]
+						// If preceded by letter, number, or punctuation (not space), it's likely closing
+						if unicode.IsLetter(charBeforeQuote) || unicode.IsDigit(charBeforeQuote) || isPunct(charBeforeQuote) {
+							isClosingQuote = true
+						}
+					}
+				}
+				
+				// Add space unless it's before another punctuation or a closing quote
+				if !isPunct(next) && !(isQuote && isClosingQuote) {
 					newRunes = append(newRunes, ' ')
 				}
 			}
@@ -66,6 +81,14 @@ func fixQuotes(s string) string {
 	isQuote := func(r rune) bool {
 		return r == '\'' || r == '\u2019'
 	}
+	
+	isPunct := func(r rune) bool {
+		switch r {
+		case '.', ',', '!', '?', ':', ';':
+			return true
+		}
+		return false
+	}
 
 	result := make([]rune, 0, len(runes))
 
@@ -83,8 +106,12 @@ func fixQuotes(s string) string {
 				continue
 			}
 
-			// Remove trailing spaces before opening quote
-			removeTrailingSpaces(&result)
+			// Only remove trailing spaces if they're not after punctuation
+			if len(result) >= 2 && unicode.IsSpace(result[len(result)-1]) && isPunct(result[len(result)-2]) {
+				// Don't remove space after punctuation
+			} else {
+				removeTrailingSpaces(&result)
+			}
 
 			// Add opening quote
 			result = append(result, runes[i])
