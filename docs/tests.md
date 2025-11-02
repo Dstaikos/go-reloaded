@@ -84,7 +84,15 @@
 
     Output: ''hello''
 
-15. OVERFLOW CHECK
+15. Input: a (up) orange
+           a (cap) orange
+           A (low) orange
+
+    Output: AN orange
+            An orange
+            an orange
+
+16. OVERFLOW CHECK
 
     Input: “FFFFFFFFFFFFFFFFFFF(hex)”
 

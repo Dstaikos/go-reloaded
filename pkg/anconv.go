@@ -17,36 +17,10 @@ func AnConvert(s string) string {
 				j++
 			}
 
-			// Check for modifiers after the article
-			k := j
-			for k < len(runes) && !unicode.IsSpace(runes[k]) {
-				k++
-			}
-			// Skip spaces after the word
-			for k < len(runes) && unicode.IsSpace(runes[k]) {
-				k++
-			}
-			
-			// Check for modifier patterns
-			modifier := ""
-			if k+4 < len(runes) && string(runes[k:k+5]) == "(up)" {
-				modifier = "up"
-			} else if k+5 < len(runes) && string(runes[k:k+6]) == "(cap)" {
-				modifier = "cap"
-			} else if k+5 < len(runes) && string(runes[k:k+6]) == "(low)" {
-				modifier = "low"
-			}
-
 			// If next word starts with a vowel or h/H → change "a" → "an"
 			if j < len(runes) && isVowel(runes[j], vowels) {
 				newRunes = append(newRunes, ' ')
-				if modifier == "up" {
-					newRunes = append(newRunes, 'A', 'N')
-				} else if modifier == "cap" {
-					newRunes = append(newRunes, 'A', 'n')
-				} else if modifier == "low" {
-					newRunes = append(newRunes, 'a', 'n')
-				} else if runes[i+1] == 'A' {
+				if runes[i+1] == 'A' {
 					newRunes = append(newRunes, 'A', 'n')
 				} else {
 					newRunes = append(newRunes, 'a', 'n')
