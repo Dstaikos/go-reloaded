@@ -106,7 +106,39 @@ func fixQuotes(s string) string {
 			// Add closing quote
 			result = append(result, runes[j])
 
-			i = j // Skip to after closing quote
+			// Look ahead for consecutive quote pairs
+			k := j + 1
+			
+			// Skip spaces and non-quote content to find next quote
+			for k < len(runes) && !isQuote(runes[k]) {
+				k++
+			}
+			
+			// If we found another quote, check if content between is only spaces/short words
+			if k < len(runes) && isQuote(runes[k]) {
+				// Check if content between quotes is "attachable" (spaces + short word)
+				trimmed := string(runes[j+1:k])
+				// Remove leading/trailing spaces
+				for len(trimmed) > 0 && unicode.IsSpace([]rune(trimmed)[0]) {
+					trimmed = trimmed[1:]
+				}
+				for len(trimmed) > 0 && unicode.IsSpace([]rune(trimmed)[len([]rune(trimmed))-1]) {
+					trimmed = trimmed[:len([]rune(trimmed))-1]
+				}
+				
+				// If only spaces or short content, attach it
+				if len(trimmed) == 0 || len([]rune(trimmed)) <= 5 {
+					// Add the content without extra spaces
+					if len(trimmed) > 0 {
+						result = append(result, []rune(trimmed)...)
+					}
+					i = k - 1 // Will be incremented by loop to k
+				} else {
+					i = j // Normal case - preserve spaces
+				}
+			} else {
+				i = j // Normal case - no consecutive quote found
+			}
 			continue
 		}
 

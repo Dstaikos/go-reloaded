@@ -76,9 +76,13 @@
 
     Output: “start here”
 
-14. Input: “math ( (up) )”
+13. Input: “math ( (up) )”
 
     Output: “MATH (  )”
+
+14. Input: '   '  hello  '   '
+
+    Output: ''hello''
 
 15. OVERFLOW CHECK
 
