@@ -84,13 +84,17 @@
 
     Output: ''hello''
 
-15. Input: a (up) orange
+15. Input:
+
+         a (up) orange
 
            a (cap) orange
 
            A (low) orange
 
-    Output: AN orange
+    Output:
+
+            AN orange
 
             An orange
 
