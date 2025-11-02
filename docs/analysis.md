@@ -4,13 +4,13 @@
 <h4> The documents in the repository will be:
 
 
-• The cmd folder with the Go program inside
+• The cmd folder with the main.go inside
 
 • The README.md file that explains the usage of the program
 
-• The folder pkg that contains all the functions that are required.
+• The folder pkg that contains all the functions that are required
 
-• The folder tasks that contains the steps followed for the creation of thee project.
+• The folder tasks that contains the steps followed for the creation of thee project
 
 </h4>
 
