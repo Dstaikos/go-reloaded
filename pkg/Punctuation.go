@@ -5,7 +5,7 @@ import "unicode"
 func FixPunctuation(s string) string {
 	// First pass: handle quotes
 	s = fixQuotes(s)
-
+	
 	// Second pass: handle punctuation
 	runes := []rune(s)
 	newRunes := make([]rune, 0, len(runes))
@@ -39,10 +39,10 @@ func FixPunctuation(s string) string {
 			}
 
 			// If there is something after the punctuation, ensure exactly one space
-			// unless the next rune is another punctuation or a closing single quote (attach to punctuation).
+			// unless the next rune is another punctuation (but allow space before quotes)
 			if k < len(runes) {
 				next := runes[k]
-				if !isPunct(next) && next != '\'' && next != '\u2019' {
+				if !isPunct(next) {
 					newRunes = append(newRunes, ' ')
 				}
 			}
@@ -66,69 +66,52 @@ func fixQuotes(s string) string {
 		return r == '\'' || r == '\u2019'
 	}
 
-	// Find all quote positions
-	quotes := []int{}
-	for i, r := range runes {
-		if isQuote(r) {
-			quotes = append(quotes, i)
-		}
-	}
-
-	// Process quotes in pairs
 	result := make([]rune, 0, len(runes))
-	lastPos := 0
 
-	for i := 0; i < len(quotes); i += 2 {
-		if i+1 >= len(quotes) {
-			// Odd number of quotes, copy rest as is
-			result = append(result, runes[lastPos:]...)
-			break
+	for i := 0; i < len(runes); i++ {
+		if isQuote(runes[i]) {
+			// Find matching closing quote
+			j := i + 1
+			for j < len(runes) && !isQuote(runes[j]) {
+				j++
+			}
+
+			if j >= len(runes) {
+				// No matching quote, copy as is
+				result = append(result, runes[i])
+				continue
+			}
+
+			// Remove trailing spaces before opening quote
+			removeTrailingSpaces(&result)
+
+			// Add opening quote
+			result = append(result, runes[i])
+
+			// Find content between quotes (trim spaces)
+			contentStart := i + 1
+			for contentStart < j && unicode.IsSpace(runes[contentStart]) {
+				contentStart++
+			}
+			contentEnd := j - 1
+			for contentEnd >= contentStart && unicode.IsSpace(runes[contentEnd]) {
+				contentEnd--
+			}
+
+			// Add content if any
+			if contentStart <= contentEnd {
+				result = append(result, runes[contentStart:contentEnd+1]...)
+			}
+
+			// Add closing quote
+			result = append(result, runes[j])
+
+			i = j // Skip to after closing quote
+			continue
 		}
 
-		start := quotes[i]
-		end := quotes[i+1]
-
-		// Copy everything before this quote pair, but remove trailing spaces
-		beforeQuote := runes[lastPos:start]
-		// Skip leading spaces in beforeQuote
-		for len(beforeQuote) > 0 && unicode.IsSpace(beforeQuote[0]) {
-			beforeQuote = beforeQuote[1:]
-		}
-		result = append(result, beforeQuote...)
-		removeTrailingSpaces(&result)
-
-		// Add opening quote
-		result = append(result, runes[start])
-
-		// Find content between quotes (trim spaces)
-		contentStart := start + 1
-		for contentStart < end && unicode.IsSpace(runes[contentStart]) {
-			contentStart++
-		}
-		contentEnd := end - 1
-		for contentEnd >= contentStart && unicode.IsSpace(runes[contentEnd]) {
-			contentEnd--
-		}
-
-		// Add content if any
-		if contentStart <= contentEnd {
-			result = append(result, runes[contentStart:contentEnd+1]...)
-		}
-
-		// Add closing quote
-		result = append(result, runes[end])
-
-		lastPos = end + 1
-	}
-
-	// Copy any remaining content after last quote pair
-	if lastPos < len(runes) {
-		remaining := runes[lastPos:]
-		// Skip leading spaces if they exist
-		for len(remaining) > 0 && unicode.IsSpace(remaining[0]) {
-			remaining = remaining[1:]
-		}
-		result = append(result, remaining...)
+		// Default: copy rune
+		result = append(result, runes[i])
 	}
 
 	return string(result)

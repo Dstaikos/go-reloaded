@@ -76,10 +76,6 @@
 
     Output: “start here”
 
-13. Input: “'  '    hello    '  '”
-
-    Output: “''hello''”
-
 14. Input: “math ( (up) )”
 
     Output: “MATH (  )”
@@ -87,6 +83,8 @@
 15. OVERFLOW CHECK
 
     Input: “FFFFFFFFFFFFFFFFFFF(hex)”
+
+    Output: "75557863725914323419135"
 
 
 

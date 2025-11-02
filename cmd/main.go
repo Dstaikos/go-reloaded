@@ -28,8 +28,8 @@ func main() {
 
 	text = pkg.HexBin(text)
 	text = pkg.UpLowCap(text)
-	text = pkg.FixPunctuation(text)
 	text = pkg.AnConvert(text)
+	text = pkg.FixPunctuation(text)
 
 	// write processed text to output file
 	if err := os.WriteFile(outputFile, []byte(text), 0o644); err != nil {
