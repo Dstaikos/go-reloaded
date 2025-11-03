@@ -12,7 +12,7 @@ The purpose is to simulate a small-scale text editor capable of fixing grammar, 
 
 <h3>How it works:</h3>
 
-You run your program like this:  
+You run your program like this:
 
 ```
 go run main.go input.txt output.txt
@@ -21,5 +21,3 @@ go run main.go input.txt output.txt
 The program will read the contents of input.txt, apply all transformation rules, and write the corrected version to output.txt.
 
 Read the full guide [here](docs/analysis.md)
-
-

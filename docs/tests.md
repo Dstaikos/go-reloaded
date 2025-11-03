@@ -114,7 +114,7 @@
 
 <h4>Paragraph</h4>
 
-As John said : ' I saw 2D (hex) birds and 1011 (bin) cats ' yesterday . It was a amazing experience !! This was truly fun (up, 3) .Can’t wait to do it again(cap, 2).
+As John said : ' I saw 2D (hex) birds and 1011 (bin) cats ' yesterday . It was a amazing experience !! This was truly fun (up, 3) .Can’t wait to do it again(cap, 2)...
 
 
-Output: As John said: 'I saw 45 birds and 11 cats' yesterday . It was an amazing experience!! This WAS TRULY FUN. Can’t wait to do It Again.
+Output: As John said: 'I saw 45 birds and 11 cats' yesterday. It was an amazing experience!! This WAS TRULY FUN. Can’t wait to do It Again...

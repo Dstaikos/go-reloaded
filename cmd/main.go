@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// check number of command line arguments
 	if len(os.Args) < 3 {
 		fmt.Println("Usage: go run main.go <input.txt> <output.txt>")
 		return
