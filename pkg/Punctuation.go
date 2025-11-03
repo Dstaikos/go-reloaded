@@ -5,7 +5,7 @@ import "unicode"
 func FixPunctuation(s string) string {
 	// First pass: handle quotes
 	s = fixQuotes(s)
-	
+
 	// Second pass: handle punctuation
 	runes := []rune(s)
 	newRunes := make([]rune, 0, len(runes))
@@ -43,7 +43,7 @@ func FixPunctuation(s string) string {
 			if k < len(runes) {
 				next := runes[k]
 				isQuote := next == '\'' || next == '\u2019'
-				
+
 				// Check if this quote is likely a closing quote by looking at what comes before it in original input
 				isClosingQuote := false
 				if isQuote {
@@ -56,7 +56,7 @@ func FixPunctuation(s string) string {
 						}
 					}
 				}
-				
+
 				// Add space unless it's before another punctuation or a closing quote
 				if !isPunct(next) && !(isQuote && isClosingQuote) {
 					newRunes = append(newRunes, ' ')
@@ -81,7 +81,7 @@ func fixQuotes(s string) string {
 	isQuote := func(r rune) bool {
 		return r == '\'' || r == '\u2019'
 	}
-	
+
 	isPunct := func(r rune) bool {
 		switch r {
 		case '.', ',', '!', '?', ':', ';':
@@ -136,16 +136,16 @@ func fixQuotes(s string) string {
 
 			// Look ahead for consecutive quote pairs
 			k := j + 1
-			
+
 			// Skip spaces and non-quote content to find next quote
 			for k < len(runes) && !isQuote(runes[k]) {
 				k++
 			}
-			
+
 			// If we found another quote, check if content between is only spaces/short words
 			if k < len(runes) && isQuote(runes[k]) {
 				// Check if content between quotes is "attachable" (spaces + short word)
-				trimmed := string(runes[j+1:k])
+				trimmed := string(runes[j+1 : k])
 				// Remove leading/trailing spaces
 				for len(trimmed) > 0 && unicode.IsSpace([]rune(trimmed)[0]) {
 					trimmed = trimmed[1:]
@@ -153,7 +153,7 @@ func fixQuotes(s string) string {
 				for len(trimmed) > 0 && unicode.IsSpace([]rune(trimmed)[len([]rune(trimmed))-1]) {
 					trimmed = trimmed[:len([]rune(trimmed))-1]
 				}
-				
+
 				// If only spaces or short content, attach it
 				if len(trimmed) == 0 || len([]rune(trimmed)) <= 5 {
 					// Add the content without extra spaces
