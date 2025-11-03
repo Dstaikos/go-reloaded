@@ -3,6 +3,17 @@ package pkg
 import "unicode"
 
 func AnConvert(s string) string {
+	for {
+		newS := anConvertOnce(s)
+		if newS == s {
+			break
+		}
+		s = newS
+	}
+	return s
+}
+
+func anConvertOnce(s string) string {
 	vowels := []rune{'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U', 'h', 'H'}
 
 	runes := []rune(s)
