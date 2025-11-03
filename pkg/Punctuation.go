@@ -94,6 +94,12 @@ func fixQuotes(s string) string {
 
 	for i := 0; i < len(runes); i++ {
 		if isQuote(runes[i]) {
+			// Skip apostrophes in contractions (surrounded by letters)
+			if i > 0 && i < len(runes)-1 && unicode.IsLetter(runes[i-1]) && unicode.IsLetter(runes[i+1]) {
+				result = append(result, runes[i])
+				continue
+			}
+			
 			// Find matching closing quote
 			j := i + 1
 			for j < len(runes) && !isQuote(runes[j]) {
