@@ -200,7 +200,7 @@ func shouldConvertArticle(newRunes *[]rune, originalRunes []rune, nextPos int, m
 	return true
 }
 
-// applyUp uppercases the previous `count` words (only if they contain letters)
+// applyUp uppercases the previous `count` words, consuming all words regardless of content
 func applyUp(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
 	applied := 0
@@ -217,6 +217,7 @@ func applyUp(newRunes *[]rune, count int) {
 		end := index
 		hasLetter := false
 
+		// Find word boundaries and check for letters
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
 			if unicode.IsLetter((*newRunes)[index]) {
 				hasLetter = true
@@ -226,16 +227,18 @@ func applyUp(newRunes *[]rune, count int) {
 
 		start := index + 1
 
+		// Apply uppercase only to letters, but consume word regardless
 		if hasLetter {
 			for i := start; i <= end; i++ {
 				(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
 			}
-			applied++
 		}
+		// Always increment applied count (consumes word even if no letters)
+		applied++
 	}
 }
 
-// applyLow lowercases the previous `count` words (only if they contain letters)
+// applyLow lowercases the previous `count` words, consuming all words regardless of content
 func applyLow(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
 	applied := 0
@@ -251,6 +254,7 @@ func applyLow(newRunes *[]rune, count int) {
 		end := index
 		hasLetter := false
 
+		// Find word boundaries and check for letters
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
 			if unicode.IsLetter((*newRunes)[index]) {
 				hasLetter = true
@@ -260,16 +264,18 @@ func applyLow(newRunes *[]rune, count int) {
 
 		start := index + 1
 
+		// Apply lowercase only to letters, but consume word regardless
 		if hasLetter {
 			for i := start; i <= end; i++ {
 				(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
 			}
-			applied++
 		}
+		// Always increment applied count (consumes word even if no letters)
+		applied++
 	}
 }
 
-// applyCap capitalizes the previous `count` words (only if they contain letters)
+// applyCap capitalizes the previous `count` words, consuming all words regardless of content
 func applyCap(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
 	applied := 0
@@ -285,6 +291,7 @@ func applyCap(newRunes *[]rune, count int) {
 		end := index
 		hasLetter := false
 
+		// Find word boundaries and check for letters
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
 			if unicode.IsLetter((*newRunes)[index]) {
 				hasLetter = true
@@ -294,6 +301,7 @@ func applyCap(newRunes *[]rune, count int) {
 
 		start := index + 1
 
+		// Apply capitalization only to letters, but consume word regardless
 		if hasLetter {
 			firstLetterFound := false
 			for i := start; i <= end; i++ {
@@ -306,7 +314,8 @@ func applyCap(newRunes *[]rune, count int) {
 					}
 				}
 			}
-			applied++
 		}
+		// Always increment applied count (consumes word even if no letters)
+		applied++
 	}
 }
