@@ -5,30 +5,27 @@ import (
 	"unicode"
 )
 
-// ...existing code...
-
+// HexBin converts hexadecimal and binary numbers to decimal
+// Processes (hex) and (bin) modifiers that follow numbers
 func HexBin(s string) string {
 	runes := []rune(s)
 	newRunes := make([]rune, 0, len(runes))
 
 	for i := 0; i < len(runes); i++ {
 
-		// Detect "(hex)"
+		// Look for (hex) modifier
 		if i+5 < len(runes) && runes[i] == '(' && runes[i+1] == 'h' && runes[i+2] == 'e' && runes[i+3] == 'x' && runes[i+4] == ')' {
-
 			removeTrailingSpaces(&newRunes)
-			applyHex(&newRunes, 1)
-			// pattern length is 5, so advance by 4 here; loop's i++ will move past ')'
-			i += 4
+			applyHex(&newRunes, 1) // Convert previous hex number to decimal
+			i += 4                 // Skip "(hex)" pattern
 			continue
 		}
 
-		// Detect "(bin)"
+		// Look for (bin) modifier
 		if i+5 < len(runes) && runes[i] == '(' && runes[i+1] == 'b' && runes[i+2] == 'i' && runes[i+3] == 'n' && runes[i+4] == ')' {
 			removeTrailingSpaces(&newRunes)
-			applyBin(&newRunes, 1)
-			// same adjustment as above
-			i += 4
+			applyBin(&newRunes, 1) // Convert previous binary number to decimal
+			i += 4                 // Skip "(bin)" pattern
 			continue
 		}
 
@@ -49,10 +46,12 @@ func trimTokenBounds(runes []rune, start, end int, allowed func(rune) bool) (int
 	return start, end
 }
 
+// applyHex converts the previous hex number(s) to decimal
 func applyHex(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
 	applied := 0
 
+	// Define valid hexadecimal characters
 	isHex := func(r rune) bool {
 		if r >= '0' && r <= '9' {
 			return true
@@ -75,33 +74,33 @@ func applyHex(newRunes *[]rune, count int) {
 		}
 
 		end := index
+		// Find word boundaries
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
 			index--
 		}
 		start := index + 1
 
-		// Trim surrounding punctuation/quotes so token starts/ends at hex digits
+		// Extract only hex digits, ignoring punctuation
 		tStart, tEnd := trimTokenBounds(*newRunes, start, end, isHex)
 		if tStart > tEnd {
-			// no hex token found in this span
-			applied++
+			applied++ // No valid hex found, skip this word
 			continue
 		}
 
+		// Convert hex string to decimal using big.Int for large numbers
 		hexStr := string((*newRunes)[tStart : tEnd+1])
 		bigInt := new(big.Int)
 		bigInt, success := bigInt.SetString(hexStr, 16)
 		if success {
 			decimalStr := []rune(bigInt.String())
 
-			// Prepare right-side slice after the token (use original end to keep surrounding punctuation)
+			// Preserve spacing with following letters
 			right := (*newRunes)[tEnd+1:]
-			// Check if we need to add a space after decimal when right begins with a letter
 			if len(right) > 0 && unicode.IsLetter(right[0]) {
 				decimalStr = append(decimalStr, ' ')
 			}
 
-			// Replace only the trimmed token region, preserving anything before tStart and after tEnd
+			// Replace hex number with decimal equivalent
 			*newRunes = append((*newRunes)[:tStart], append(decimalStr, right...)...)
 		}
 
@@ -109,10 +108,12 @@ func applyHex(newRunes *[]rune, count int) {
 	}
 }
 
+// applyBin converts the previous binary number(s) to decimal
 func applyBin(newRunes *[]rune, count int) {
 	index := len(*newRunes) - 1
 	applied := 0
 
+	// Define valid binary characters
 	isBin := func(r rune) bool {
 		return r == '0' || r == '1'
 	}
@@ -126,33 +127,33 @@ func applyBin(newRunes *[]rune, count int) {
 		}
 
 		end := index
+		// Find word boundaries
 		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
 			index--
 		}
 		start := index + 1
 
-		// Trim surrounding punctuation/quotes so token starts/ends at binary digits
+		// Extract only binary digits, ignoring punctuation
 		tStart, tEnd := trimTokenBounds(*newRunes, start, end, isBin)
 		if tStart > tEnd {
-			// no bin token found in this span
-			applied++
+			applied++ // No valid binary found, skip this word
 			continue
 		}
 
+		// Convert binary string to decimal using big.Int for large numbers
 		binStr := string((*newRunes)[tStart : tEnd+1])
 		bigInt := new(big.Int)
 		bigInt, success := bigInt.SetString(binStr, 2)
 		if success {
 			decimalStr := []rune(bigInt.String())
 
-			// Prepare right-side slice after the token
+			// Preserve spacing with following letters
 			right := (*newRunes)[tEnd+1:]
-			// Add space if next rune is a letter
 			if len(right) > 0 && unicode.IsLetter(right[0]) {
 				decimalStr = append(decimalStr, ' ')
 			}
 
-			// Replace only the trimmed token region
+			// Replace binary number with decimal equivalent
 			*newRunes = append((*newRunes)[:tStart], append(decimalStr, right...)...)
 		}
 

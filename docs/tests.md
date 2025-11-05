@@ -105,9 +105,13 @@
 
     Output: don't 'go'
 
+17. Input: Yes ,a elephant
+
+    Output: Yes, an elephant
 
 
-17. OVERFLOW CHECK
+
+18. OVERFLOW CHECK
 
     Input: “FFFFFFFFFFFFFFFFFFF(hex)”
 

@@ -4,18 +4,21 @@ import (
 	"unicode"
 )
 
+// UpLowCap applies case transformations based on (up), (low), and (cap) modifiers
+// Also handles special article conversion when modifying "a" before vowel words
 func UpLowCap(s string) string {
 	runes := []rune(s)
 	newRunes := make([]rune, 0, len(runes))
 
 	for i := 0; i < len(runes); i++ {
 
-		// Detect "(up"
+		// Look for (up) modifiers
 		if i+3 < len(runes) && runes[i] == '(' && runes[i+1] == 'u' && runes[i+2] == 'p' {
 
-			// ---------- CASE 1: (up) ----------
+			// Handle (up) - uppercase previous word
 			if i+3 < len(runes) && runes[i+3] == ')' {
 				removeTrailingSpaces(&newRunes)
+				// Check for article conversion first ("a" → "AN")
 				if shouldConvertArticle(&newRunes, runes, i+4, "up") {
 					i += 3
 					continue
@@ -25,12 +28,13 @@ func UpLowCap(s string) string {
 				continue
 			}
 
-			// ---------- CASE 2: (up, x) ----------
+			// Handle (up, x) - uppercase previous x words
 			if i+5 < len(runes) && runes[i+3] == ',' && runes[i+4] == ' ' {
 				j := i + 5
 				num := 0
 				hasDigit := false
 
+				// Parse the number
 				for j < len(runes) && unicode.IsDigit(runes[j]) {
 					num = num*10 + int(runes[j]-'0')
 					j++
@@ -39,6 +43,11 @@ func UpLowCap(s string) string {
 
 				if hasDigit && j < len(runes) && runes[j] == ')' {
 					removeTrailingSpaces(&newRunes)
+					// Check for article conversion first
+					if shouldConvertArticle(&newRunes, runes, j+1, "up") {
+						i = j
+						continue
+					}
 					applyUp(&newRunes, num)
 					i = j
 					continue
@@ -75,6 +84,10 @@ func UpLowCap(s string) string {
 
 				if hasDigit && j < len(runes) && runes[j] == ')' {
 					removeTrailingSpaces(&newRunes)
+					if shouldConvertArticle(&newRunes, runes, j+1, "low") {
+						i = j
+						continue
+					}
 					applyLow(&newRunes, num)
 					i = j
 					continue
@@ -111,6 +124,10 @@ func UpLowCap(s string) string {
 
 				if hasDigit && j < len(runes) && runes[j] == ')' {
 					removeTrailingSpaces(&newRunes)
+					if shouldConvertArticle(&newRunes, runes, j+1, "cap") {
+						i = j
+						continue
+					}
 					applyCap(&newRunes, num)
 					i = j
 					continue
@@ -127,11 +144,12 @@ func UpLowCap(s string) string {
 
 // ==================== HELPER FUNCTIONS ====================
 
-// shouldConvertArticle checks if last word is "a" and next word starts with vowel, then converts accordingly
+// shouldConvertArticle handles special case: "a" + modifier + vowel word → "an"/"AN"/"An"
+// Returns true if conversion was applied, false if normal modifier should be used
 func shouldConvertArticle(newRunes *[]rune, originalRunes []rune, nextPos int, modifier string) bool {
 	vowels := []rune{'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U', 'h', 'H'}
 	
-	// Check if last word is "a" or "A"
+	// Find last word and check if it's standalone "a" or "A"
 	index := len(*newRunes) - 1
 	for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
 		index--
@@ -140,12 +158,12 @@ func shouldConvertArticle(newRunes *[]rune, originalRunes []rune, nextPos int, m
 		return false
 	}
 	
-	// Check if it's a single character word
+	// Ensure it's a standalone article, not part of another word
 	if index > 0 && !unicode.IsSpace((*newRunes)[index-1]) {
 		return false
 	}
 	
-	// Find next word in original runes
+	// Find next word in original input
 	for nextPos < len(originalRunes) && unicode.IsSpace(originalRunes[nextPos]) {
 		nextPos++
 	}
@@ -154,7 +172,7 @@ func shouldConvertArticle(newRunes *[]rune, originalRunes []rune, nextPos int, m
 		return false
 	}
 	
-	// Check if next word starts with vowel
+	// Check if next word starts with vowel/h
 	startsWithVowel := false
 	for _, v := range vowels {
 		if originalRunes[nextPos] == v {
@@ -167,7 +185,7 @@ func shouldConvertArticle(newRunes *[]rune, originalRunes []rune, nextPos int, m
 		return false
 	}
 	
-	// Convert article based on modifier
+	// Apply appropriate article conversion based on modifier
 	if modifier == "up" {
 		(*newRunes)[index] = 'A'
 		*newRunes = append((*newRunes)[:index+1], append([]rune{'N'}, (*newRunes)[index+1:]...)...)

@@ -2,11 +2,13 @@ package pkg
 
 import "unicode"
 
+// FixPunctuation normalizes spacing around punctuation marks and quotes
+// Two-pass approach: quotes first, then punctuation spacing
 func FixPunctuation(s string) string {
-	// First pass: handle quotes
+	// First pass: process quotes and remove internal spaces
 	s = fixQuotes(s)
 
-	// Second pass: handle punctuation
+	// Second pass: fix spacing around punctuation marks
 	runes := []rune(s)
 	newRunes := make([]rune, 0, len(runes))
 
@@ -21,50 +23,47 @@ func FixPunctuation(s string) string {
 	for i := 0; i < len(runes); i++ {
 		r := runes[i]
 
-		// If we hit a punctuation rune, collect the whole punctuation sequence
+		// Process punctuation sequences
 		if isPunct(r) {
+			// Collect consecutive punctuation marks
 			j := i
 			for j < len(runes) && isPunct(runes[j]) {
 				j++
 			}
 
-			// Remove any spaces before punctuation and append the punctuation unit
+			// Remove spaces before punctuation, add punctuation
 			removeTrailingSpaces(&newRunes)
 			newRunes = append(newRunes, runes[i:j]...)
 
-			// Skip any spaces after the punctuation in the input
+			// Skip spaces after punctuation in input
 			k := j
 			for k < len(runes) && unicode.IsSpace(runes[k]) {
 				k++
 			}
 
-			// If there is something after the punctuation, ensure exactly one space
-			// unless the next rune is another punctuation or a closing quote
+			// Add single space after punctuation (with exceptions)
 			if k < len(runes) {
 				next := runes[k]
 				isQuote := next == '\'' || next == '\u2019'
 
-				// Check if this quote is likely a closing quote by looking at what comes before it in original input
+				// Detect closing quotes (preceded by non-space)
 				isClosingQuote := false
 				if isQuote {
-					// Look at the character before this quote in the original input
 					if k > 0 {
 						charBeforeQuote := runes[k-1]
-						// If preceded by letter, number, or punctuation (not space), it's likely closing
 						if unicode.IsLetter(charBeforeQuote) || unicode.IsDigit(charBeforeQuote) || isPunct(charBeforeQuote) {
 							isClosingQuote = true
 						}
 					}
 				}
 
-				// Add space unless it's before another punctuation or a closing quote
+				// Add space unless next is punctuation or closing quote
 				if !isPunct(next) && !(isQuote && isClosingQuote) {
 					newRunes = append(newRunes, ' ')
 				}
 			}
 
-			// Advance i to the last consumed position (loop will ++ it)
-			i = k - 1
+			i = k - 1 // Skip processed characters
 			continue
 		}
 
@@ -75,6 +74,8 @@ func FixPunctuation(s string) string {
 	return string(newRunes)
 }
 
+// fixQuotes processes quote pairs and removes internal spaces
+// Handles nested quotes and preserves spacing after punctuation
 func fixQuotes(s string) string {
 	runes := []rune(s)
 
@@ -94,7 +95,7 @@ func fixQuotes(s string) string {
 
 	for i := 0; i < len(runes); i++ {
 		if isQuote(runes[i]) {
-			// Skip apostrophes in contractions (surrounded by letters)
+			// Skip apostrophes in contractions (don't vs 'quote')
 			if i > 0 && i < len(runes)-1 && unicode.IsLetter(runes[i-1]) && unicode.IsLetter(runes[i+1]) {
 				result = append(result, runes[i])
 				continue
@@ -107,14 +108,22 @@ func fixQuotes(s string) string {
 			}
 
 			if j >= len(runes) {
-				// No matching quote, copy as is
-				result = append(result, runes[i])
+				result = append(result, runes[i]) // Unmatched quote
 				continue
 			}
 
 			// Only remove trailing spaces if they're not after punctuation
 			if len(result) >= 2 && unicode.IsSpace(result[len(result)-1]) && isPunct(result[len(result)-2]) {
 				// Don't remove space after punctuation
+			} else if len(result) >= 1 && unicode.IsSpace(result[len(result)-1]) {
+				// Check if there's content before the space that's not punctuation
+				if len(result) >= 2 && !isPunct(result[len(result)-2]) {
+					// Keep one space before quote if not after punctuation
+					removeTrailingSpaces(&result)
+					result = append(result, ' ')
+				} else {
+					removeTrailingSpaces(&result)
+				}
 			} else {
 				removeTrailingSpaces(&result)
 			}
