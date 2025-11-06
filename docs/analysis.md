@@ -1,4 +1,3 @@
-
 <h1>Analysis</h1>
 
 <h4> The documents in the repository will be:
@@ -30,7 +29,7 @@ go run ./cmd/main.go <input.txt> <output.txt>
 
 
 
-<h3>The program is a tool that processes and “corrects” a user’s text file based on specific rules:</h3>
+<h3>The program is a tool that processes and "corrects" a user's text file based on specific rules:</h3>
 
 • When **(hex)** appears, it converts the hexadecimal number that comes *before* it into its decimal form.
 Example: `"1E (hex) files were added"` → `"30 files were added"`
@@ -66,7 +65,7 @@ Example: `"I am exactly how they describe me: ' awesome '"` → `"I am exactly h
 * If there is more than one word inside the quotes, there should still be **no spaces** between the quotes and the inner text.
   Example: `"As Elton John said: ' I am the most well-known homosexual in the world '"` → `"As Elton John said: 'I am the most well-known homosexual in the world'"`
 
-• When the single letter **“a” (or “A”)** appears by itself and is followed by a vowel (**a, e, i, o, u**) or **h**, it should change to **“an” (or “An”)**.
+• When the single letter **"a" (or "A")** appears by itself and is followed by a vowel (**a, e, i, o, u**) or **h**, it should change to **"an" (or "An")**.
 Example: `"There it was. A amazing rock!"` → `"There it was. An amazing rock!"`
 
 
@@ -77,3 +76,17 @@ All commands must follow the exact format shown in the specifications. For examp
 Additionally, the number following a modifier (e.g. in (up, 2)) must be a non-negative integer (≥ 0). If a negative number or a non-integer character is provided, it will also be treated as normal text rather than a valid command.
 
 If the number of words requested to be modified is larger than the actual number of words available, the modifier will apply to every available word and then stop.
+
+## Word Definition and Modifier Consumption
+
+For the purposes of modifier application, a **word** is defined as any sequence of alphanumeric characters (letters and numbers) that is separated by whitespace. This includes:
+
+• Individual letters: `a`, `Z`
+• Individual numbers: `5`, `42`
+• Mixed alphanumeric sequences: `abc123`, `test2`
+• Pure alphabetic words: `hello`, `WORLD`
+• Pure numeric sequences: `12345`
+
+When a modifier with a count is applied (e.g., `(up, 3)`), it will consume exactly the specified number of words moving backwards from the modifier position, regardless of whether those words contain letters that can be transformed. Words consisting entirely of numbers or special characters will be counted and consumed by the modifier but will remain visually unchanged since they contain no letters to transform.
+
+**Example:** In `"i love you 2 (up, 3)"`, the modifier consumes three words backwards: `"2"`, `"you"`, `"love"`. The result is `"i LOVE YOU 2"` where `"2"` is consumed but unchanged, while `"you"` and `"love"` are transformed to uppercase.
