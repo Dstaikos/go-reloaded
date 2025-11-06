@@ -82,10 +82,15 @@ If the number of words requested to be modified is larger than the actual number
 For the purposes of modifier application, a **word** is defined as any sequence of alphanumeric characters (letters and numbers) that is separated by whitespace. This includes:
 
 • Individual letters: `a`, `Z`
+
 • Individual numbers: `5`, `42`
+
 • Mixed alphanumeric sequences: `abc123`, `test2`
+
 • Pure alphabetic words: `hello`, `WORLD`
+
 • Pure numeric sequences: `12345`
+
 
 When a modifier with a count is applied (e.g., `(up, 3)`), it will consume exactly the specified number of words moving backwards from the modifier position, regardless of whether those words contain letters that can be transformed. Words consisting entirely of numbers or special characters will be counted and consumed by the modifier but will remain visually unchanged since they contain no letters to transform.
 
