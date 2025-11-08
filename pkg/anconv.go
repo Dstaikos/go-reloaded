@@ -41,6 +41,11 @@ func anConvertOnce(s string) string {
 			for j < len(runes) && unicode.IsSpace(runes[j]) {
 				j++
 			}
+			
+			// Skip opening quote if present to find actual word
+			if j < len(runes) && runes[j] == '\'' {
+				j++
+			}
 
 			// Convert "a" → "an" if next word starts with vowel/h
 			if j < len(runes) && isVowel(runes[j], vowels) {
