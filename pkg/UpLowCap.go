@@ -43,12 +43,10 @@ func UpLowCap(s string) string {
 
 				if hasDigit && j < len(runes) && runes[j] == ')' {
 					removeTrailingSpaces(&newRunes)
-					// Check for article conversion first
-					if shouldConvertArticle(&newRunes, runes, j+1, "up") {
-						i = j
-						continue
-					}
+					// Apply normal modifier first
 					applyUp(&newRunes, num)
+					// Then check if we need article conversion (this will override the "A" with "AN")
+					shouldConvertArticle(&newRunes, runes, j+1, "up")
 					i = j
 					continue
 				}
@@ -84,11 +82,10 @@ func UpLowCap(s string) string {
 
 				if hasDigit && j < len(runes) && runes[j] == ')' {
 					removeTrailingSpaces(&newRunes)
-					if shouldConvertArticle(&newRunes, runes, j+1, "low") {
-						i = j
-						continue
-					}
+					// Apply normal modifier first
 					applyLow(&newRunes, num)
+					// Then check if we need article conversion
+					shouldConvertArticle(&newRunes, runes, j+1, "low")
 					i = j
 					continue
 				}
@@ -124,11 +121,10 @@ func UpLowCap(s string) string {
 
 				if hasDigit && j < len(runes) && runes[j] == ')' {
 					removeTrailingSpaces(&newRunes)
-					if shouldConvertArticle(&newRunes, runes, j+1, "cap") {
-						i = j
-						continue
-					}
+					// Apply normal modifier first
 					applyCap(&newRunes, num)
+					// Then check if we need article conversion
+					shouldConvertArticle(&newRunes, runes, j+1, "cap")
 					i = j
 					continue
 				}
@@ -159,7 +155,8 @@ func shouldConvertArticle(newRunes *[]rune, originalRunes []rune, nextPos int, m
 	}
 	
 	// Ensure it's a standalone article, not part of another word
-	if index > 0 && !unicode.IsSpace((*newRunes)[index-1]) {
+	// Allow spaces or punctuation before the article
+	if index > 0 && unicode.IsLetter((*newRunes)[index-1]) {
 		return false
 	}
 	
@@ -206,8 +203,8 @@ func applyUp(newRunes *[]rune, count int) {
 	applied := 0
 
 	for index >= 0 && applied < count {
-		// Skip trailing spaces
-		for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
+		// Skip spaces and quotes when looking for words
+		for index >= 0 && (unicode.IsSpace((*newRunes)[index]) || (*newRunes)[index] == '\'') {
 			index--
 		}
 		if index < 0 {
@@ -217,8 +214,8 @@ func applyUp(newRunes *[]rune, count int) {
 		end := index
 		hasLetter := false
 
-		// Find word boundaries and check for letters
-		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
+		// Find word boundaries and check for letters, treating quotes as boundaries
+		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) && (*newRunes)[index] != '\'' {
 			if unicode.IsLetter((*newRunes)[index]) {
 				hasLetter = true
 			}
@@ -244,7 +241,8 @@ func applyLow(newRunes *[]rune, count int) {
 	applied := 0
 
 	for index >= 0 && applied < count {
-		for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
+		// Skip spaces and quotes when looking for words
+		for index >= 0 && (unicode.IsSpace((*newRunes)[index]) || (*newRunes)[index] == '\'') {
 			index--
 		}
 		if index < 0 {
@@ -254,8 +252,8 @@ func applyLow(newRunes *[]rune, count int) {
 		end := index
 		hasLetter := false
 
-		// Find word boundaries and check for letters
-		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
+		// Find word boundaries and check for letters, treating quotes as boundaries
+		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) && (*newRunes)[index] != '\'' {
 			if unicode.IsLetter((*newRunes)[index]) {
 				hasLetter = true
 			}
@@ -281,7 +279,8 @@ func applyCap(newRunes *[]rune, count int) {
 	applied := 0
 
 	for index >= 0 && applied < count {
-		for index >= 0 && unicode.IsSpace((*newRunes)[index]) {
+		// Skip spaces and quotes when looking for words
+		for index >= 0 && (unicode.IsSpace((*newRunes)[index]) || (*newRunes)[index] == '\'') {
 			index--
 		}
 		if index < 0 {
@@ -291,8 +290,8 @@ func applyCap(newRunes *[]rune, count int) {
 		end := index
 		hasLetter := false
 
-		// Find word boundaries and check for letters
-		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) {
+		// Find word boundaries and check for letters, treating quotes as boundaries
+		for index >= 0 && !unicode.IsSpace((*newRunes)[index]) && (*newRunes)[index] != '\'' {
 			if unicode.IsLetter((*newRunes)[index]) {
 				hasLetter = true
 			}

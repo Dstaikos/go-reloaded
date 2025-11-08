@@ -113,9 +113,16 @@
 
     Output: Yes, an elephant
 
+18. Input: wow ,a(up, 2) elephant
+
+    Output: WOW, AN elephant
+
+19. Input: '  THE END IS NEAR  ' (low, 3)
+
+    Output: 'THE end is near'
 
 
-18. OVERFLOW CHECK
+20. OVERFLOW CHECK
 
     Input: FFFFFFFFFFFFFFFFFFF(hex)
 
@@ -131,4 +138,6 @@
 As John said : ' I saw 2D (hex) birds and 1011 (bin) cats ' yesterday . It was a amazing experience !! This was truly fun (up, 3) .Can’t wait to do it again(cap, 2)...
 
 
-Output: As John said: 'I saw 45 birds and 11 cats' yesterday. It was an amazing experience!! This WAS TRULY FUN. Can’t wait to do It Again...
+
+
+Expected Output: As John said: 'I saw 45 birds and 11 cats' yesterday. It was an amazing experience!! This WAS TRULY FUN. Can’t wait to do It Again...
