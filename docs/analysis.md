@@ -20,6 +20,11 @@
 
 ```
 git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
+```
+
+<h3> Next, enter the go-reloaded folder:</h3>
+
+```
 cd go-reloaded
 ```
 
