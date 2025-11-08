@@ -8,6 +8,8 @@
 
 • The README.md file that explains the usage of the program
 
+• The folder docs that contains documentation files
+
 • The folder pkg that contains all the functions that are required
 
 • The folder tasks that contains the steps followed for the creation of thee project
