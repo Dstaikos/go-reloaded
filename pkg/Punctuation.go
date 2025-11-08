@@ -46,12 +46,22 @@ func FixPunctuation(s string) string {
 				next := runes[k]
 				isQuote := next == '\'' || next == '\u2019'
 
-				// Detect closing quotes (preceded by non-space)
+				// Detect closing quotes (preceded by content AND followed by space/punct/end)
 				isClosingQuote := false
 				if isQuote {
 					if k > 0 {
 						charBeforeQuote := runes[k-1]
-						if unicode.IsLetter(charBeforeQuote) || unicode.IsDigit(charBeforeQuote) || isPunct(charBeforeQuote) {
+						// Check what comes after the quote too
+						charAfterQuote := rune(0)
+						if k+1 < len(runes) {
+							charAfterQuote = runes[k+1]
+						}
+						
+						// It's a closing quote if preceded by content AND followed by space/punctuation/end
+						precededByContent := unicode.IsLetter(charBeforeQuote) || unicode.IsDigit(charBeforeQuote) || isPunct(charBeforeQuote)
+						followedBySpaceOrPunct := k+1 >= len(runes) || unicode.IsSpace(charAfterQuote) || isPunct(charAfterQuote)
+						
+						if precededByContent && followedBySpaceOrPunct {
 							isClosingQuote = true
 						}
 					}
