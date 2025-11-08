@@ -22,16 +22,18 @@
 git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
 ```
 
-<h3> Next, enter the go-reloaded folder:</h3>
+<h3> Next, enter the go-reloaded and then the cmd folder:</h3>
 
 ```
 cd go-reloaded
+
+cd cmd
 ```
 
 <h3>After making sure the .txt file you want to use as input is inside cmd folder, run the program using:</h3>
 
 ```
-go run ./cmd/main.go <input.txt> <output.txt>
+go run main.go <input.txt> <output.txt>
 ```
 
 
