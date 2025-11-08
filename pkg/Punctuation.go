@@ -179,8 +179,16 @@ func fixQuotes(s string) string {
 					trimmed = trimmed[:len([]rune(trimmed))-1]
 				}
 
-				// If only spaces or short content, attach it
-				if len(trimmed) == 0 || len([]rune(trimmed)) <= 5 {
+				// If only spaces or single word, attach it (nested quotes)
+				isSingleWord := len(trimmed) == 0 || (len(trimmed) > 0 && !unicode.IsSpace([]rune(trimmed)[0]))
+				for _, r := range []rune(trimmed) {
+					if unicode.IsSpace(r) {
+						isSingleWord = false
+						break
+					}
+				}
+				
+				if isSingleWord {
 					// Add the content without extra spaces
 					if len(trimmed) > 0 {
 						result = append(result, []rune(trimmed)...)

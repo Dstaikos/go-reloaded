@@ -224,14 +224,25 @@ func applyUp(newRunes *[]rune, count int) {
 
 		start := index + 1
 
-		// Apply uppercase only to letters, but consume word regardless
-		if hasLetter {
-			for i := start; i <= end; i++ {
-				(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
+		// Check if this sequence contains alphanumeric characters (is a "word")
+		hasAlphanumeric := false
+		for i := start; i <= end; i++ {
+			if unicode.IsLetter((*newRunes)[i]) || unicode.IsDigit((*newRunes)[i]) {
+				hasAlphanumeric = true
+				break
 			}
 		}
-		// Always increment applied count (consumes word even if no letters)
-		applied++
+
+		// Only count alphanumeric sequences as words
+		if hasAlphanumeric {
+			// Apply uppercase only to letters
+			if hasLetter {
+				for i := start; i <= end; i++ {
+					(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
+				}
+			}
+			applied++
+		}
 	}
 }
 
@@ -262,14 +273,25 @@ func applyLow(newRunes *[]rune, count int) {
 
 		start := index + 1
 
-		// Apply lowercase only to letters, but consume word regardless
-		if hasLetter {
-			for i := start; i <= end; i++ {
-				(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
+		// Check if this sequence contains alphanumeric characters (is a "word")
+		hasAlphanumeric := false
+		for i := start; i <= end; i++ {
+			if unicode.IsLetter((*newRunes)[i]) || unicode.IsDigit((*newRunes)[i]) {
+				hasAlphanumeric = true
+				break
 			}
 		}
-		// Always increment applied count (consumes word even if no letters)
-		applied++
+
+		// Only count alphanumeric sequences as words
+		if hasAlphanumeric {
+			// Apply lowercase only to letters
+			if hasLetter {
+				for i := start; i <= end; i++ {
+					(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
+				}
+			}
+			applied++
+		}
 	}
 }
 
@@ -300,21 +322,32 @@ func applyCap(newRunes *[]rune, count int) {
 
 		start := index + 1
 
-		// Apply capitalization only to letters, but consume word regardless
-		if hasLetter {
-			firstLetterFound := false
-			for i := start; i <= end; i++ {
-				if unicode.IsLetter((*newRunes)[i]) {
-					if !firstLetterFound {
-						(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
-						firstLetterFound = true
-					} else {
-						(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
+		// Check if this sequence contains alphanumeric characters (is a "word")
+		hasAlphanumeric := false
+		for i := start; i <= end; i++ {
+			if unicode.IsLetter((*newRunes)[i]) || unicode.IsDigit((*newRunes)[i]) {
+				hasAlphanumeric = true
+				break
+			}
+		}
+
+		// Only count alphanumeric sequences as words
+		if hasAlphanumeric {
+			// Apply capitalization only to letters
+			if hasLetter {
+				firstLetterFound := false
+				for i := start; i <= end; i++ {
+					if unicode.IsLetter((*newRunes)[i]) {
+						if !firstLetterFound {
+							(*newRunes)[i] = unicode.ToUpper((*newRunes)[i])
+							firstLetterFound = true
+						} else {
+							(*newRunes)[i] = unicode.ToLower((*newRunes)[i])
+						}
 					}
 				}
 			}
+			applied++
 		}
-		// Always increment applied count (consumes word even if no letters)
-		applied++
 	}
 }
