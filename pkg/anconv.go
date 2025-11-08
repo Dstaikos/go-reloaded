@@ -44,12 +44,20 @@ func anConvertOnce(s string) string {
 
 			// Convert "a" → "an" if next word starts with vowel/h
 			if j < len(runes) && isVowel(runes[j], vowels) {
+				// Check if next word is uppercase (indicating up modifier was used)
+				nextWordUppercase := j < len(runes) && unicode.IsUpper(runes[j])
+				
 				// Rebuild the converted sequence
 				if isSpaceA {
 					newRunes = append(newRunes, ' ')
 				}
 				if runes[aIndex] == 'A' {
-					newRunes = append(newRunes, 'A', 'n')
+					// If A + uppercase word, use AN (from up modifier)
+					if nextWordUppercase {
+						newRunes = append(newRunes, 'A', 'N')
+					} else {
+						newRunes = append(newRunes, 'A', 'n')
+					}
 				} else {
 					newRunes = append(newRunes, 'a', 'n')
 				}
