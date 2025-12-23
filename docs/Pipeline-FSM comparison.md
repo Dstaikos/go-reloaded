@@ -1,75 +1,60 @@
-<h2>Comparison Between Pipeline and FSM Architectures</h2>
+# Architecture Comparison: Pipeline vs FSM
 
-<h3>Pipeline</h3>
+## Pipeline Architecture
 
-The Pipeline architecture divides text processing into sequential stages.
-Each stage takes the result of the previous one and modifies it.
-This allows having separate functions such as:
+The Pipeline architecture divides text processing into sequential stages, where each stage takes the result of the previous one and modifies it.
 
-• Detecting and converting (hex) and (bin)
+### Core Functions
+- Detecting and converting `(hex)` and `(bin)` numbers
+- Applying text transformations: `(up)`, `(low)`, `(cap)`
+- Correcting punctuation marks
+- Replacing "a" with "an" where necessary
 
-• Applying (up), (low), (cap)
-
-• Correcting punctuation marks
-
-• Replacing a with an where necessary
-
-Example flow:
-
+### Processing Flow
+```
 Initial text → Number conversion → Word formatting → Punctuation correction → Final text
+```
 
-<h4>Advantages:</h4>
+#### ✅ Advantages
+- **Clear separation of concerns** - Each stage has a single responsibility
+- **Easy testing** - Each stage can be tested independently
+- **High readability** - Simple, auditable code structure
+- **Maintainable** - Easy to add or modify individual stages
 
-• Clear separation of processes
+#### ❌ Disadvantages
+- **Context dependency** - Some stages need access to previous words (e.g., `(up, 3)`)
+- **Multiple passes** - Text may be processed multiple times
 
-• Easy testing, since each stage can be checked independently
+## FSM (Finite State Machine) Architecture
 
-• Readable and simple code (ideal for auditing)
+The FSM processes text token by token, changing states based on encountered patterns.
 
-<h4>Disadvantages:</h4>
+### State Examples
+- **Normal**: Processing regular words
+- **Marker**: Handling `(up)`, `(low)`, or `(cap)` commands
+- **Quote**: Processing text within single quotes
+- **Number**: Converting numbers before `(hex)` or `(bin)`
 
-• Some stages require access to previous words (like (up, 3)), so some extra logic is needed
+#### ✅ Advantages
+- **Single pass efficiency** - Processes text in one iteration
+- **Precise context control** - Easy to apply transformations like `(up, 3)`
+- **Optimal parsing** - Natural fit for sequential text processing
 
-• The code may pass over the same text multiple times
+#### ❌ Disadvantages
+- **Complex implementation** - More intricate state management
+- **Testing challenges** - Interconnected components harder to isolate
+- **Higher cognitive load** - Requires understanding state transitions and interactions
 
-<h3>FSM (Finite State Machine)</h3>
+## Final Architecture Decision
 
-The FSM works differently: the program reads the text step by step (token by token) and changes its state depending on what it encounters.
+**Chosen: Pipeline Architecture**
 
-Example states:
+### Rationale
+For this text processing application, **modularity and maintainability are prioritized over performance optimization**. The Pipeline approach provides:
 
-• Normal: reading regular words
+- **Modular design** - Each transformation can be developed and tested independently
+- **Clear data flow** - Easy to trace how text is transformed at each stage
+- **Extensibility** - New transformation rules can be added without affecting existing stages
+- **Debugging simplicity** - Issues can be isolated to specific pipeline stages
 
-• Marker: when encountering “(up)”, “(low)”, or “(cap)”
-
-• Quote: when inside ' '
-
-• Number: when encountering a number before (hex) or (bin)
-
-The program has one main loop that checks the current state and decides what to do with the next word.
-
-<h4>Advantages:</h4>
-
-• Everything happens in a single pass through the text (efficient)
-
-• Very precise context control (e.g., easily apply (up, 3) to previous words)
-
-• Good logic for parsing
-
-<h4>Disadvantages:</h4>
-
-• More complex code
-
-• Harder to test since everything is interconnected
-
-• Lower readability for auditors
-
-<h3>Architecture Choice</h3>
-
-I chose to use the Pipeline approach.
-
-The program will be reviewed by other auditors, so clarity and simplicity of the code are more important than optimization.
-
-With the Pipeline, I can write small, clear functions that each apply one specific rule and explain the program flow step by step.
-
-An FSM would be more efficient but harder to understand or audit.
+While an FSM offers better performance through single-pass processing, the Pipeline architecture better aligns with the project's emphasis on code maintainability and feature extensibility.

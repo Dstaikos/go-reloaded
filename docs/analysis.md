@@ -1,106 +1,129 @@
-<h1>Analysis</h1>
+# Go-Reloaded: Text Processing Tool Analysis
 
-<h4> The documents in the repository will be:
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Command Specifications](#command-specifications)
+- [Word Definition](#word-definition)
 
+## Installation
 
-
-• The cmd folder with the main.go inside
-
-• The README.md file that explains the usage of the program
-
-• The folder docs that contains documentation files
-
-• The folder pkg that contains all the functions that are required
-
-• The folder tasks that contains the steps followed for the creation of thee project
-
-</h4>
-
-<h3> First, clone the repository:</h3>
-
-```
+### Clone the Repository
+```bash
 git clone https://platform.zone01.gr/git/dstaikos/go-reloaded.git
 ```
 
-<h3> Next, enter the go-reloaded and then the cmd folder:</h3>
-
-```
-cd go-reloaded
-
-cd cmd
+### Navigate to Project
+```bash
+cd go-reloaded/cmd
 ```
 
-<h3>After making sure the .txt file you want to use as input is inside cmd folder, run the program using:</h3>
+## Usage
 
-```
+Place your input text file in the `cmd` folder and run:
+
+```bash
 go run main.go <input.txt> <output.txt>
 ```
 
+## Features
 
+This tool processes and corrects text files based on the following transformation rules:
 
-<h3>The program is a tool that processes and "corrects" a user's text file based on specific rules:</h3>
+### Number Conversions
 
-• When **(hex)** appears, it converts the hexadecimal number that comes *before* it into its decimal form.
-Example: `"1E (hex) files were added"` → `"30 files were added"`
+#### Hexadecimal to Decimal
+- **Trigger:** `(hex)` after a hexadecimal number
+- **Example:** `"1E (hex) files were added"` → `"30 files were added"`
 
-• When **(bin)** appears, it converts the binary number that comes *before* it into its decimal form.
-Example: `"It has been 10 (bin) years"` → `"It has been 2 years"`
+#### Binary to Decimal
+- **Trigger:** `(bin)` after a binary number
+- **Example:** `"It has been 10 (bin) years"` → `"It has been 2 years"`
 
-• When **(up)** appears, it changes the word that comes *before* it so that **all its letters become uppercase**.
-Example: `"Ready, set, go (up)!"` → `"Ready, set, GO!"`
+### Text Transformations
 
-• When **(low)** appears, it changes the word that comes *before* it so that **all its letters become lowercase**.
-Example: `"I should stop SHOUTING (low)"` → `"I should stop shouting"`
+#### Uppercase
+- **Trigger:** `(up)` after a word
+- **Example:** `"Ready, set, go (up)!"` → `"Ready, set, GO!"`
 
-• When **(cap)** appears, it changes the word that comes *before* it so that **only its first letter is capitalized**.
-Example: `"Welcome to the Brooklyn bridge (cap)"` → `"Welcome to the Brooklyn Bridge"`
+#### Lowercase
+- **Trigger:** `(low)` after a word
+- **Example:** `"I should stop SHOUTING (low)"` → `"I should stop shouting"`
 
-• If **(up)**, **(low)**, or **(cap)** are followed by a comma and a number *x* inside the parentheses, the transformation applies to the **x previous words**.
-Example: `"This is so exciting (up, 2)"` → `"This is SO EXCITING"`
+#### Capitalize
+- **Trigger:** `(cap)` after a word
+- **Example:** `"Welcome to the Brooklyn bridge (cap)"` → `"Welcome to the Brooklyn Bridge"`
 
-• When punctuation marks like **. , ! ? : ;** appear, they must:
+#### Multiple Word Transformations
+- **Trigger:** `(up, x)`, `(low, x)`, or `(cap, x)` where x is the number of previous words
+- **Example:** `"This is so exciting (up, 2)"` → `"This is SO EXCITING"`
 
-* Be **attached** directly to the previous word (remove any spaces before them).
+### Punctuation Correction
 
-* Have **exactly one space** after them (add one if missing, or remove extra ones).
-  Example: `"I was sitting over there ,and then BAMM !!"` → `"I was sitting over there, and then BAMM!!"`
+Punctuation marks (`. , ! ? : ;`) are automatically corrected to:
+- **Attach directly** to the previous word (no spaces before)
+- **Have exactly one space** after them
 
-* If multiple punctuation marks appear together (e.g. `...` or `!?`), they should be treated as **a single unit**, and the same spacing rules apply.
-  Example: `"I was thinking ... You were right"` → `"I was thinking... You were right"`
+**Examples:**
+- `"I was sitting over there ,and then BAMM !!"` → `"I was sitting over there, and then BAMM!!"`
+- `"I was thinking ... You were right"` → `"I was thinking... You were right"`
 
-• Every **'** (apostrophe) must appear in **pairs** and be placed **directly around** the word(s) they enclose, with **no spaces** between the quotes and the words.
-Example: `"I am exactly how they describe me: ' awesome '"` → `"I am exactly how they describe me: 'awesome'"`
+### Quote Formatting
 
-* If there is more than one word inside the quotes, there should still be **no spaces** between the quotes and the inner text.
-  Example: `"As Elton John said: ' I am the most well-known homosexual in the world '"` → `"As Elton John said: 'I am the most well-known homosexual in the world'"`
+Single quotes (`'`) are automatically paired and formatted:
+- **No spaces** between quotes and enclosed text
+- **Proper pairing** of opening and closing quotes
 
-• When the single letter **"a" (or "A")** appears by itself and is followed by a vowel (**a, e, i, o, u**) or **h**, it should change to **"an" (or "An")**.
-Example: `"There it was. A amazing rock!"` → `"There it was. An amazing rock!"`
+**Examples:**
+- `"I am exactly how they describe me: ' awesome '"` → `"I am exactly how they describe me: 'awesome'"`
+- `"As Elton John said: ' I am the most well-known homosexual in the world '"` → `"As Elton John said: 'I am the most well-known homosexual in the world'"`
 
+### Article Correction
 
-<h2>⚠️ Important:</h2>
+The article "a" (or "A") is automatically changed to "an" (or "An") when followed by:
+- **Vowels:** a, e, i, o, u
+- **The letter h**
 
-All commands must follow the exact format shown in the specifications. For example, (up, 2) is valid, but ( up,2 ) or (up , 2) will not be recognized as a command and will be treated as normal text. Any extra or misplaced spaces inside the parentheses will cause the modifier to be ignored.
+**Example:** `"There it was. A amazing rock!"` → `"There it was. An amazing rock!"`
 
-Additionally, the number following a modifier (e.g. in (up, 2)) must be a non-negative integer (≥ 0). If a negative number or a non-integer character is provided, it will also be treated as normal text rather than a valid command.
+## Command Specifications
 
-If the number of words requested to be modified is larger than the actual number of words available, the modifier will apply to every available word and then stop.
+### Format Requirements
 
-## Word Definition and Modifier Consumption
+⚠️ **Important:** Commands must follow exact formatting:
 
-For the purposes of modifier application, a **word** is defined as any sequence of alphanumeric characters (letters and numbers) that is separated by whitespace. This includes:
+- **Valid:** `(up, 2)`
+- **Invalid:** `( up,2 )`, `(up , 2)` - treated as normal text
 
-• Individual letters: `a`, `Z`
+### Number Constraints
 
-• Individual numbers: `5`, `42`
+- Numbers must be **non-negative integers** (≥ 0)
+- **Negative numbers** or **non-integers** are treated as normal text
+- If requested word count exceeds available words, transformation applies to all available words
 
-• Mixed alphanumeric sequences: `abc123`, `test2`
+### Processing Behavior
 
-• Pure alphabetic words: `hello`, `WORLD`
+When word count exceeds available words, the modifier applies to every available word and stops.
 
-• Pure numeric sequences: `12345`
+## Word Definition
 
+For transformation purposes, a **word** is defined as any sequence of alphanumeric characters separated by whitespace:
 
-When a modifier with a count is applied (e.g., `(up, 3)`), it will consume exactly the specified number of words moving backwards from the modifier position, regardless of whether those words contain letters that can be transformed. Words consisting entirely of numbers or special characters will be counted and consumed by the modifier but will remain visually unchanged since they contain no letters to transform.
+- **Individual letters:** `a`, `Z`
+- **Individual numbers:** `5`, `42`
+- **Mixed sequences:** `abc123`, `test2`
+- **Alphabetic words:** `hello`, `WORLD`
+- **Numeric sequences:** `12345`
 
-**Example:** In `"i love you 2 (up, 3)"`, the modifier consumes three words backwards: `"2"`, `"you"`, `"love"`. The result is `"i LOVE YOU 2"` where `"2"` is consumed but unchanged, while `"you"` and `"love"` are transformed to uppercase.
+### Modifier Consumption
+
+When applying counted modifiers (e.g., `(up, 3)`):
+- Consumes exactly the specified number of words **backwards** from modifier position
+- Words with no transformable letters are counted but remain unchanged
+- Only letters are transformed; numbers and special characters remain intact
+
+**Example:** 
+- Input: `"i love you 2 (up, 3)"`
+- Consumed words: `"2"`, `"you"`, `"love"`
+- Output: `"i LOVE YOU 2"`
