@@ -1,22 +1,22 @@
-## TASK-003 — Hex & Binary Conversion
+## TASK-003 — Case Transformation (up/low/cap)
 
 - **ID**: TASK-003
 - **Owner**: Backend Developer
-- **Size**: M
+- **Size**: L
 - **Confidence**: High
-- **Hard Dependencies**: TASK-002-helper
-- **Soft Dependencies**: TASK-002
-- **Related Blueprint Pillars**: Numeric Conversion
+- **Hard Dependencies**: TASK-002
+- **Soft Dependencies**: None
+- **Related Blueprint Pillars**: Text Transformation
 
 ### Mission Profile
-Implement `(hex)` and `(bin)` conversions in a single function that detects and converts hexadecimal and binary numbers to decimal.
+Implement all case transformations in a single function: `(up)`, `(up, x)`, `(low)`, `(low, x)`, `(cap)`, and `(cap, x)` that modify the previous one or `x` words.
 
 ### Deliverables
-- `/pkg/hexconv.go` with `HexBin()` function handling both conversions.
-- Helper functions: `applyHex()`, `applyBin()`, `trimTokenBounds()`, `removeTrailingSpaces()`.
-- Unit tests for valid/invalid hex and binary formats.
+- `/pkg/CaseTransform.go` with `CaseTransform()` function handling all three transformations.
+- Helper functions: `applyUp()`, `applyLow()`, `applyCap()`, `removeTrailingSpaces()`.
+- Unit tests for all valid and invalid formats.
 
-### Steps
-1. **Write Tests:** `"1E (hex)"` → `"30"`; `"101 (bin)"` → `"5"`; invalid formats ignored.
-2. **Implement:** Single `HexBin()` function using `strconv.ParseInt()` with base 16 and 2, plus token boundary trimming.
-3. **Validate:** Run `go test ./pkg` — all conversion tests pass.
+### Steps (TDD Flow)
+1. **Write Tests:** `"this is nice (up)"` → `"this is NICE"`; `"I AM HERE (low, 2)"` → `"I am here"`; `"hello world (cap, 2)"` → `"Hello World"`.
+2. **Implement:** Single `CaseTransform()` function with pattern detection for all three modifiers using rune-based parsing.
+3. **Validate:** Run `go test ./pkg` — all case transformation tests pass.

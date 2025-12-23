@@ -1,22 +1,21 @@
-## TASK-003 — Case Transformation (up/low/cap)
+## TASK-002 — Helper Functions & Utilities
 
-- **ID**: TASK-003
+- **ID**: TASK-002
 - **Owner**: Backend Developer
-- **Size**: L
+- **Size**: S
 - **Confidence**: High
-- **Hard Dependencies**: TASK-002-helper
-- **Soft Dependencies**: TASK-003
-- **Related Blueprint Pillars**: Text Transformation
+- **Hard Dependencies**: TASK-001
+- **Soft Dependencies**: None
+- **Related Blueprint Pillars**: Code Utilities
 
 ### Mission Profile
-Implement all case transformations in a single function: `(up)`, `(up, x)`, `(low)`, `(low, x)`, `(cap)`, and `(cap, x)` that modify the previous one or `x` words.
+Implement core helper functions that will be used across multiple transformation modules, particularly space handling utilities.
 
 ### Deliverables
-- `/pkg/UpLowCap.go` with `UpLowCap()` function handling all three transformations.
-- Helper functions: `applyUp()`, `applyLow()`, `applyCap()`, `removeTrailingSpaces()`.
-- Unit tests for all valid and invalid formats.
+- `/pkg/RemoveSpaces.go` with `removeTrailingSpaces()` function.
+- Unit tests for space removal edge cases.
 
 ### Steps (TDD Flow)
-1. **Write Tests:** `"this is nice (up)"` → `"this is NICE"`; `"I AM HERE (low, 2)"` → `"I am here"`; `"hello world (cap, 2)"` → `"Hello World"`.
-2. **Implement:** Single `UpLowCap()` function with pattern detection for all three modifiers using rune-based parsing.
-3. **Validate:** Run `go test ./pkg` — all case transformation tests pass.
+1. **Write Tests:** Verify trailing space removal from rune slices; empty slice handling; mixed whitespace characters.
+2. **Implement:** `removeTrailingSpaces(newRunes *[]rune)` using `unicode.IsSpace()` to clean up text before applying transformations.
+3. **Validate:** Run `go test ./pkg` — all utility function tests pass.
