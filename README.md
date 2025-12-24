@@ -1,6 +1,6 @@
 # Go-Reloaded 🚀
 
-![Go Version](https://img.shields.io/badge/Go-1.19+-00ADD8?style=for-the-badge&logo=go&logoColor=white)
+![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen?style=for-the-badge)
 ![Build](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge)
@@ -20,7 +20,7 @@ A powerful text processing and auto-correction tool written in Go that applies i
 ## 🚀 Quick Start
 
 ### 📋 Prerequisites
-- Go 1.19 or higher
+- Go 1.21 or higher
 
 ### 📦 Installation
 
