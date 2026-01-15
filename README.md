@@ -6,9 +6,9 @@
 ![Build](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge)
 ![Architecture](https://img.shields.io/badge/Architecture-Pipeline-blue?style=for-the-badge)
 
-A powerful text processing and auto-correction tool written in Go that applies intelligent transformations to text files. ✨
+A powerful text processing and auto-correction tool written in Go that applies intelligent transformations to text files.
 
-## ✨ Features
+## Features
 
 - 🔢 **Number Base Conversion** - Convert hexadecimal and binary numbers to decimal
 - 🔤 **Text Case Transformation** - Apply uppercase, lowercase, and capitalization rules
@@ -17,26 +17,26 @@ A powerful text processing and auto-correction tool written in Go that applies i
 - 📖 **Article Correction** - Intelligent "a" to "an" replacements
 - ⚡ **Batch Processing** - Apply transformations to multiple words at once
 
-## 🚀 Quick Start
+## Quick Start
 
-### 📋 Prerequisites
+### Prerequisites
 - Go 1.21 or higher
 
-### 📦 Installation
+### Installation
 
 ```bash
 git clone https://github.com/yourusername/go-reloaded.git
 cd go-reloaded
 ```
 
-### 🎯 Usage
+### Usage
 
 ```bash
 cd cmd
 go run main.go input.txt output.txt
 ```
 
-## 💡 Examples
+##  Examples
 
 ### 🔢 Number Conversions
 ```
@@ -56,7 +56,7 @@ Input:  "This is so exciting (up, 2)"
 Output: "This is SO EXCITING"
 ```
 
-### ✨ Smart Corrections
+###  Smart Corrections
 ```
 Input:  "I was sitting over there ,and then BAMM !!"
 Output: "I was sitting over there, and then BAMM!!"
@@ -79,7 +79,7 @@ go-reloaded/
 └── README.md
 ```
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 
@@ -91,11 +91,11 @@ go test ./...
 
 For detailed transformation rules and technical specifications, see [docs/analysis.md](docs/analysis.md).
 
-## 🛠️ Development Process
+## Development Process
 
 This project follows the Zone01 curriculum requirements. Development steps and process documentation can be found in the `tasks/` folder.
 
-## 🏗️ Architecture
+## Architecture
 
 This project uses a **Pipeline Architecture** for clear separation of concerns and maintainability. Each transformation stage processes the text sequentially, making the code easy to test, debug, and extend.
 
@@ -113,4 +113,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with Go** 🐹 • **Pipeline Architecture** 🔧 • **Comprehensive Testing** ✅
+**Built with Go**  • **Pipeline Architecture**  • **Comprehensive Testing**
